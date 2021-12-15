@@ -41,34 +41,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	idleRightAnim.loop = true;
 	idleRightAnim.speed = 0.15f;
 
-	// idle left 2
-	idleLeftAnim2.PushBack({ 0, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 27, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 53, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 79, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 105, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 131, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 157, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 131, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 157, 247, 27, 33 });
-	idleLeftAnim2.PushBack({ 184, 247, 27, 33 });
-	idleLeftAnim2.loop = true;
-	idleLeftAnim2.speed = 0.15f;
-
-	// idle right 2
-	idleRightAnim2.PushBack({ 184, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 157, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 131, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 105, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 79, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 53, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 27, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 53, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 27, 287, 27, 33 });
-	idleRightAnim2.PushBack({ 0, 287, 27, 33 });
-	idleRightAnim2.loop = true;
-	idleRightAnim2.speed = 0.15f;
-
 	// move left
 	leftAnim.PushBack({ 1, 7, 28, 33 });
 	leftAnim.PushBack({ 28, 7, 28, 33 });
@@ -248,48 +220,25 @@ Update_Status ModulePlayer::Update()
 		switch (PlayerLookingPosition)
 		{
 		case 1:
-			if (playerIdleAnimationTimer <= 180)
+			if (currentAnimation != &idleLeftAnim)
 			{
-				if (currentAnimation != &idleLeftAnim)
-				{
-					idleLeftAnim.Reset();
-					currentAnimation = &idleLeftAnim;
-				}
-			}
-			else if (playerIdleAnimationTimer > 180) // <-- Should be random
-			{
-				if (currentAnimation != &idleLeftAnim2)
-				{
-					idleLeftAnim2.Reset();
-					currentAnimation = &idleLeftAnim2;
-				}
-				if (playerIdleAnimationTimer >= 243) playerIdleAnimationTimer = 0; // <-- Should also be random
+				idleLeftAnim.Reset();
+				currentAnimation = &idleLeftAnim;
 			}
 
 			break;
 		case 2:
-			if (playerIdleAnimationTimer <= 180)
+			if (currentAnimation != &idleRightAnim)
 			{
-				if (currentAnimation != &idleRightAnim)
-				{
-					idleRightAnim.Reset();
-					currentAnimation = &idleRightAnim;
-				}
-			}
-			else if (playerIdleAnimationTimer > 180) // <-- Should be random
-			{
-				if (currentAnimation != &idleRightAnim2)
-				{
-					idleRightAnim2.Reset();
-					currentAnimation = &idleRightAnim2;
-				}
-				if (playerIdleAnimationTimer >= 243) playerIdleAnimationTimer = 0; // <-- Should also be random
+				idleRightAnim.Reset();
+				currentAnimation = &idleRightAnim;
 			}
 
 			break;
 		}
 	}
 
+	/*
 	if ((PlayerLookingPosition == 1) && (position.x < App->render->camera.x / SCREEN_SIZE + 190))
 	{
 		App->render->camera.x -= 5;
@@ -298,6 +247,7 @@ Update_Status ModulePlayer::Update()
 	{
 		App->render->camera.x += 5;
 	}
+	*/
 
 	/*
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
@@ -368,40 +318,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	*/
 
-	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::TELEPORT_R)
-	{
-		position.x = position.x - 730;
-
-		App->sceneLevel_1->bgTextureL1X = App->sceneLevel_1->bgTextureL1X - 438;
-		App->sceneLevel_1->bgTextureL2X = App->sceneLevel_1->bgTextureL2X - 365;
-		App->sceneLevel_1->bgTextureL3X = App->sceneLevel_1->bgTextureL3X - 292;
-		App->sceneLevel_1->bgTextureL4X = App->sceneLevel_1->bgTextureL4X - 146;
-
-		App->sceneLevel_1->bgTextureL1X2 = App->sceneLevel_1->bgTextureL1X2 - 438;
-		App->sceneLevel_1->bgTextureL2X2 = App->sceneLevel_1->bgTextureL2X2 - 365;
-		App->sceneLevel_1->bgTextureL3X2 = App->sceneLevel_1->bgTextureL3X2 - 292;
-		App->sceneLevel_1->bgTextureL4X2 = App->sceneLevel_1->bgTextureL4X2 - 146;
-
-		App->render->camera.x = App->render->camera.x - 2200;
-	}
-
-	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::TELEPORT_L)
-	{
-		position.x = position.x + 730;
-
-		App->sceneLevel_1->bgTextureL1X = App->sceneLevel_1->bgTextureL1X + 438;
-		App->sceneLevel_1->bgTextureL2X = App->sceneLevel_1->bgTextureL2X + 365;
-		App->sceneLevel_1->bgTextureL3X = App->sceneLevel_1->bgTextureL3X + 292;
-		App->sceneLevel_1->bgTextureL4X = App->sceneLevel_1->bgTextureL4X + 146;
-
-		App->sceneLevel_1->bgTextureL1X2 = App->sceneLevel_1->bgTextureL1X2 + 438;
-		App->sceneLevel_1->bgTextureL2X2 = App->sceneLevel_1->bgTextureL2X2 + 365;
-		App->sceneLevel_1->bgTextureL3X2 = App->sceneLevel_1->bgTextureL3X2 + 292;
-		App->sceneLevel_1->bgTextureL4X2 = App->sceneLevel_1->bgTextureL4X2 + 146;
-
-		App->render->camera.x = App->render->camera.x + 2200;
-	}
-
+	//Example
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::PLANT)
 	{
 		plantCollision = true;
