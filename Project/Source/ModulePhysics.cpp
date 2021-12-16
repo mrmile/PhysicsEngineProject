@@ -12,6 +12,9 @@
 #include "SceneLevel1.h"
 #include "ModulePlayer.h"
 
+#include <iostream>
+using namespace std;
+
 ModulePhysics::ModulePhysics(bool startEnabled) : Module(startEnabled)
 {
 
@@ -112,6 +115,9 @@ Update_Status ModulePhysics::Update()
 	App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
 	App->player->vx += App->player->ax * dt;
 	App->player->vy += App->player->ay * dt;
+
+	cout << App->player->position.x << endl;
+	cout << App->player->position.y << endl << endl;
 
 	// Step #4: solve collisions <-- En el apartado de collisions de la entidad
 	/*
