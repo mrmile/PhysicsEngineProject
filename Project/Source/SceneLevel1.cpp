@@ -34,13 +34,13 @@ bool SceneLevel1::Start()
 	App->audio->PlayMusic("Assets/_.ogg", 1.0f);
 
 	//Collider example
-	//App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
 
 	App->collisions->AddCollider({ 0, 0, 90000, 90000 }, Collider::Type::NULL_COLLIDER);
 
 	
 
-	App->render->camera.x = 2200;
+	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
 	App->player->Enable();

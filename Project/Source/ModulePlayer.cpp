@@ -87,8 +87,8 @@ bool ModulePlayer::Start()
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
-	position.x = 830;
-	position.y = 180;
+	position.x = 100;
+	position.y = 50;
 
 	destroyed = false;
 
@@ -113,14 +113,15 @@ bool ModulePlayer::Start()
 	vy = 0.0f;
 	ax = 0.0f; //
 	ay = 0.0f; //
-	Fx = 0.0f;
-	Fy = 0.0f;
+	fx = 0.0f;
+	fy = 0.0f;
 	dt = 0.0f; //
 
 
-	mass = 0.0f;
-	surface = 0.0f;
-	cd = 0.0f;
+	mass = 10.0f;
+	surface = 2.0f;
+	cd = 0.4f;
+	cl = 1.2f;
 
 	forceTimerX = 0.0f;
 
@@ -145,18 +146,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &leftAnim;
 		}
 		speed_F = 1;
-		//position.x -= speed;
-		//App->render->camera.x -= 3;
-
-		/*
-		if (speedX < 10) speedX = App->modulePhysics->ApplyForce(5.6f, playerMass, forceTimerX);
-		position.x -= speedX;
-		App->render->camera.x -= speedX * SCREEN_SIZE;
-		*/
-		//forceTimerX++;
-		if (dt < 1)dt = dt + 0.016f;
-
-		ax = -0.2f;
+		position.x++;
 
 		PlayerLookingPosition = 1;
 	}
@@ -169,31 +159,8 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 		}
 		speed_F = 1;
-		//position.x += speed;
-		//App->render->camera.x += 3;
-
-		/*
-		if (speedX < 10) speedX = App->modulePhysics->ApplyForce(5.6f, playerMass, forceTimerX);
-		position.x += speedX;
-		App->render->camera.x += speedX * SCREEN_SIZE;
-		*/
-		//forceTimerX++;
-		if (dt < 1.5f)dt = dt + 0.016f;
-
-		ax = 0.2f;
 
 		PlayerLookingPosition = 2;
-	}
-
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_DOWN)
-	{
-		dt = 0.25;
-		vx = 0;
-	}
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_DOWN)
-	{
-		dt = 0.5;
-		vx = 0;
 	}
 	
 
@@ -205,18 +172,7 @@ Update_Status ModulePlayer::Update()
 	{
 		playerIdleAnimationTimer++;
 		speed_F = 0;
-		//vx = 0;
-		//vy = 0;
-
 		
-		if (dt >= 0) dt = dt - 0.016f;
-		if (dt <= 0)
-		{
-			dt = 0;
-			vx = 0;
-		}
-		
-
 		switch (PlayerLookingPosition)
 		{
 		case 1:
@@ -317,7 +273,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		score += 23;
 	}
 	*/
-
+	
 	//Example
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::PLANT)
 	{
@@ -326,5 +282,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	else
 	{
 		plantCollision = false;
+	}
+
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::WALL)
+	{
+		App->player->vx = App->player->vy = 0.0;
+		App->player->ax = App->player->ay = 0.0;
+		App->player->fx = App->player->fy = 0.0;
+		App->player->touchingGround = true;
+	}
+	else
+	{
+		App->player->touchingGround = false;
 	}
 }

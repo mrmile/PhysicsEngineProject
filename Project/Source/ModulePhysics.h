@@ -45,13 +45,30 @@ public:
 	//inline bool IsEnabled() const { return isEnabled; }
 
 	
-	float x, y;
-	float Vx, Vy;
-	float ax, ay;
-	float Fx, Fy;
-	
-	
-	int mass, surface, cd;
+	double x;
+	double y;
+
+	// Velocity
+	double vx;
+	double vy;
+
+	// Acceleration
+	double ax;
+	double ay;
+
+	// Force (total) applied to the ball
+	double fx;
+	double fy;
+
+	// Mass
+	double mass;
+
+	// Aerodynamics stuff
+	double surface; // Effective wet surface
+	double cl; // Lift coefficient
+	double cd; // Drag coefficient
+
+	double dt;
 
 	int timeCounter;
 
