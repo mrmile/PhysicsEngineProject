@@ -31,11 +31,11 @@ Application::Application()
 	modules[4] =	audio =			new ModuleAudio(true);
 
 	modules[5] =	sceneIntro =	new SceneIntro(false);
-	modules[6] =	sceneLevel_1 =	new SceneLevel1(true);		//Gameplay scene starts disabled
-	modules[7] =	player =		new ModulePlayer(false);	//Player starts disabled
+	modules[6] =	sceneLevel_1 =	new SceneLevel1(true);
+	modules[7] =	player =		new ModulePlayer(false);
 	modules[8] =	particles =		new ModuleParticles(true);
-	modules[9] =	interactiveObj = new ModuleInteractiveObj(false);	//interactiveObjs start disabled
-	modules[10] =	enemies =		new ModuleEnemies(false);	//Enemies start disabled
+	modules[9] =	interactiveObj = new ModuleInteractiveObj(false);
+	modules[10] =	enemies =		new ModuleEnemies(false);
 
 	modules[11] =	modulePhysics = new ModulePhysics(true);
 	modules[12] =	collisions =	new ModuleCollisions(true);
