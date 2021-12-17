@@ -77,18 +77,22 @@ Update_Status ModulePhysics::Update()
 	*/
 
 	// Step #0: Reset total acceleration and total accumulated force of the player (clear old values)
-	App->player->fx = App->player->fy = 0.0;
-	App->player->ax = App->player->ay = 0.0;
+	App->player->fy = 0.0f;
+	App->player->ay = 0.0f;
+
+	//App->player->fx = 0.0f;
+	//App->player->ax = 0.0f;
 
 	// Step #1: Compute forces
 
 		// Compute Gravity force
-	double fgx = App->player->mass * 0.0;
-	double fgy = App->player->mass * -10.0; // Let's assume gravity is constant and downwards
+	double fgx = App->player->mass * 0.0f;
+	double fgy = App->player->mass * 0.1f; // Let's assume gravity is constant and downwards
 
 	// Add gravity force to the total accumulated force of the player
 	App->player->fx += fgx;
 	App->player->fy += fgy;
+	dt = 1;
 
 	// Compute Aerodynamic Lift & Drag forces (not done yet)
 	//double speed = App->player->speed(App->player->vx - atmosphere.windx, App->player->vy - atmosphere.windy);
@@ -111,13 +115,16 @@ Update_Status ModulePhysics::Update()
 	// Step #3: Integrate --> from accel to new velocity & new position. 
 	// We will use the 2nd order "Velocity Verlet" method for integration.
 	// You can also move this code into a subroutine: integrator_velocity_verlet(player, dt);
-	//App->player->position.x += App->player->vx * dt + 0.5 * App->player->ax * dt * dt;
-	//App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
+	App->player->position.x += App->player->vx * dt + 0.5 * App->player->ax * dt * dt;
+	App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
 	App->player->vx += App->player->ax * dt;
 	App->player->vy += App->player->ay * dt;
 
 	cout << App->player->position.x << endl;
 	cout << App->player->position.y << endl << endl;
+
+	LOG("Player X: %i\n", App->player->position.x);
+	LOG("Player Y: %i\n", App->player->position.y);
 
 	// Step #4: solve collisions <-- En el apartado de collisions de la entidad
 	/*

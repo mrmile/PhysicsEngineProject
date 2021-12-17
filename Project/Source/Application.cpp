@@ -38,7 +38,7 @@ Application::Application()
 	modules[10] =	enemies =		new ModuleEnemies(false);
 
 	modules[11] =	modulePhysics = new ModulePhysics(true);
-	modules[12] =	collisions =	new ModuleCollisions(true);
+	modules[12] =	collisions =	new ModuleCollisions(false);
 	modules[13] =	fade =			new ModuleFadeToBlack(true);
 	modules[14] =	fonts =			new ModuleFonts(true);
 	modules[15] =	render =		new ModuleRender(true);
