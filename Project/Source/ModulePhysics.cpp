@@ -111,8 +111,8 @@ Update_Status ModulePhysics::Update()
 	// Step #3: Integrate --> from accel to new velocity & new position. 
 	// We will use the 2nd order "Velocity Verlet" method for integration.
 	// You can also move this code into a subroutine: integrator_velocity_verlet(player, dt);
-	App->player->position.x += App->player->vx * dt + 0.5 * App->player->ax * dt * dt;
-	App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
+	//App->player->position.x += App->player->vx * dt + 0.5 * App->player->ax * dt * dt;
+	//App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
 	App->player->vx += App->player->ax * dt;
 	App->player->vy += App->player->ay * dt;
 

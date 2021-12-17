@@ -18,28 +18,18 @@
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle left
-	idleLeftAnim.PushBack({ 0, 167, 28, 33 });
-	idleLeftAnim.PushBack({ 27, 167, 28, 33 });
-	idleLeftAnim.PushBack({ 54, 167, 28, 33 });
-	idleLeftAnim.PushBack({ 82, 167, 28, 33 });
-	idleLeftAnim.PushBack({ 109, 167, 27, 33 });
-	idleLeftAnim.PushBack({ 135, 167, 28, 33 });
-	idleLeftAnim.PushBack({ 162, 167, 28, 33 });
-	idleLeftAnim.PushBack({ 189, 167, 28, 33 });
+	idleLeftAnim.PushBack({ 2, 0, 31, 39 });
+	idleLeftAnim.PushBack({ 32, 0, 30, 39 });
+	idleLeftAnim.PushBack({ 61, 0, 30, 39 });
 	idleLeftAnim.loop = true;
-	idleLeftAnim.speed = 0.15f;
+	idleLeftAnim.speed = 0.1f;
 
 	// idle Right
-	idleRightAnim.PushBack({ 190, 207, 28, 33 });
-	idleRightAnim.PushBack({ 163, 207, 28, 33 });
-	idleRightAnim.PushBack({ 136, 207, 28, 33 });
-	idleRightAnim.PushBack({ 108, 207, 28, 33 });
-	idleRightAnim.PushBack({ 82, 207, 27, 33 });
-	idleRightAnim.PushBack({ 55, 207, 28, 33 });
-	idleRightAnim.PushBack({ 28, 207, 28, 33 });
-	idleRightAnim.PushBack({ 1, 207, 28, 33 });
+	idleRightAnim.PushBack({ 717, 0, 31, 39 });
+	idleRightAnim.PushBack({ 687, 0, 30, 39 });
+	idleRightAnim.PushBack({ 658, 0, 30, 39 });
 	idleRightAnim.loop = true;
-	idleRightAnim.speed = 0.15f;
+	idleRightAnim.speed = 0.1f;
 
 	// Move left
 	leftAnim.PushBack({ 1, 7, 28, 33 });
@@ -87,12 +77,12 @@ bool ModulePlayer::Start()
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
-	position.x = 100;
-	position.y = 50;
+	position.x = 200;
+	position.y = 157;
 
 	destroyed = false;
 
-	collider = App->collisions->AddCollider({ position.x + 6, position.y + 6, 19, 27 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x + 10, position.y + 6, 16, 30 }, Collider::Type::PLAYER, this);
 
 	// TODO 0: Notice how a font is loaded and the meaning of all its arguments 
 	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
@@ -146,7 +136,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &leftAnim;
 		}
 		speed_F = 1;
-		position.x++;
+		position.x--;
 
 		PlayerLookingPosition = 1;
 	}
@@ -159,6 +149,7 @@ Update_Status ModulePlayer::Update()
 			currentAnimation = &rightAnim;
 		}
 		speed_F = 1;
+		position.x++;
 
 		PlayerLookingPosition = 2;
 	}
@@ -235,8 +226,6 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 	*/
-
-	collider->SetPos(position.x + 6, position.y + 6);
 
 	currentAnimation->Update();
 

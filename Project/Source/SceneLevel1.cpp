@@ -26,10 +26,10 @@ bool SceneLevel1::Start()
 
 	bool ret = true;
 
-	bgTextureL1 = App->textures->Load("Assets/background_L1.png");
+	bgTextureL1 = App->textures->Load("Assets/Background.png");
 	
 
-	level = App->textures->Load("Assets/scenario.png");
+	level = App->textures->Load("Assets/mapWormspng.png");
 
 	App->audio->PlayMusic("Assets/_.ogg", 1.0f);
 
@@ -40,8 +40,8 @@ bool SceneLevel1::Start()
 
 	
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	App->render->camera.x = 10;
+	App->render->camera.y = 150;
 
 	App->player->Enable();
 	App->enemies->Enable();
@@ -52,7 +52,7 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	//App->render->camera.x += 3;
+	/*App->render->camera.x += 3;*/
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -62,9 +62,9 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	// Draw everything --------------------------------------
 
-	App->render->Blit(bgTextureL1, 0, 0, NULL, 0.6f);
+	App->render->Blit(bgTextureL1, -35, 30, NULL, 0.6f);
 	
-	App->render->Blit(level, 0, 0, NULL, 1.0f);
+	App->render->Blit(level, -1, 0, NULL, 1.0f);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
