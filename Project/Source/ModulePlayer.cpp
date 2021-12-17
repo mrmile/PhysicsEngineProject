@@ -58,6 +58,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rightAnim.PushBack({ 1, 47, 28, 33 });
 	rightAnim.loop = true;
 	rightAnim.speed = 0.3f;
+
+	// jump
+	jumpAnim.PushBack({ 717, 0, 31, 39 });
+	jumpAnim.PushBack({ 687, 0, 30, 39 });
+	jumpAnim.PushBack({ 658, 0, 30, 39 });
+	jumpAnim.loop = true;
+	jumpAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -142,7 +149,7 @@ Update_Status ModulePlayer::Update()
 
 		PlayerLookingPosition = 1;
 	}
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_UP)App->player->fx = 0.0f;
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_UP)App->player->fx = 1.0f;
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
 	{
@@ -157,7 +164,21 @@ Update_Status ModulePlayer::Update()
 
 		PlayerLookingPosition = 2;
 	}
-	else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_UP)App->player->fx = 0.0f;
+	else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_UP)App->player->fx = -1.0f;
+
+	if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && position.y >= 227)
+	{
+		if (currentAnimation != &jumpAnim)
+		{
+			jumpAnim.Reset();
+			currentAnimation = &jumpAnim;
+		}
+		speed_F = 1;
+		//position.x++;
+		App->player->fy = -1.2f;
+
+	}
+	//else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_UP)App->player->fy = 0.0f;
 
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
@@ -167,7 +188,7 @@ Update_Status ModulePlayer::Update()
 	{
 		playerIdleAnimationTimer++;
 		speed_F = 0;
-		//App->player->fx = 0.0f;
+		App->player->fx = 0.0f;
 		
 		switch (PlayerLookingPosition)
 		{
@@ -232,6 +253,8 @@ Update_Status ModulePlayer::Update()
 	}
 	*/
 
+	//if (position.y >= 228) position.y = 228;
+
 	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -280,13 +303,29 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::WALL)
 	{
-		App->player->vy = 0.0;
-		App->player->ay = 0.0;
-		App->player->fy = 0.0;
+		position.y = 227;
 
-		//App->player->vx = 0.0;
-		//App->player->ax = 0.0;
-		//App->player->fx = 0.0;
+		if (App->input->keys[SDL_SCANCODE_UP] != Key_State::KEY_DOWN)
+		{
+			App->player->vy = 0.0;
+			App->player->ay = 0.0;
+			App->player->fy = 0.0;
+		}
+
+		if (PlayerLookingPosition == 1)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if(ax != 0)App->player->fx = 1.0;
+			//if (vx == 0)App->player->fx = 0.0;
+		}
+		if (PlayerLookingPosition == 2)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (ax != 0)App->player->fx = -1.0;
+			//if (vx == 0)App->player->fx = 0.0;
+		}
 		App->player->touchingGround = true;
 	}
 	else

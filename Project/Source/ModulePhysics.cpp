@@ -77,8 +77,8 @@ Update_Status ModulePhysics::Update()
 	*/
 
 	// Step #0: Reset total acceleration and total accumulated force of the player (clear old values)
-	App->player->fy = 0.0f;
-	App->player->ay = 0.0f;
+	//App->player->fy = 0.0f;
+	//App->player->ay = 0.0f;
 
 	//App->player->fx = 0.0f;
 	//App->player->ax = 0.0f;
@@ -87,7 +87,7 @@ Update_Status ModulePhysics::Update()
 
 		// Compute Gravity force
 	double fgx = App->player->mass * 0.0f;
-	double fgy = App->player->mass * 0.1f; // Let's assume gravity is constant and downwards
+	double fgy = App->player->mass * 0.005f; // Let's assume gravity is constant and downwards
 
 	// Add gravity force to the total accumulated force of the player
 	App->player->fx += fgx;
@@ -105,6 +105,8 @@ Update_Status ModulePhysics::Update()
 	//App->player->fx += fdx;
 	//App->player->fy += fdy;
 
+	//App->player->fx += App->player->ffx;
+
 	// Other forces
 	// ...
 
@@ -120,11 +122,11 @@ Update_Status ModulePhysics::Update()
 	App->player->vx += App->player->ax * dt;
 	App->player->vy += App->player->ay * dt;
 
-	cout << App->player->position.x << endl;
-	cout << App->player->position.y << endl << endl;
+	//cout << App->player->position.x << endl;
+	//cout << App->player->position.y << endl << endl;
 
-	LOG("Player X: %i\n", App->player->position.x);
-	LOG("Player Y: %i\n", App->player->position.y);
+	//LOG("Player X: %i\n", App->player->position.x);
+	//LOG("Player Y: %i\n", App->player->position.y);
 
 	// Step #4: solve collisions <-- En el apartado de collisions de la entidad
 	/*

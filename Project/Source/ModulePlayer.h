@@ -53,6 +53,8 @@ public:
 	Animation rightAnim;
 	Animation leftAnim;
 
+	Animation jumpAnim;
+
 	// The player's collider
 	Collider* collider = nullptr;
 
@@ -95,6 +97,9 @@ public:
 	// Force (total) applied to the ball
 	double fx;
 	double fy;
+
+	//friction force on x axis
+	double ffx = 0;
 
 	// Mass
 	double mass;

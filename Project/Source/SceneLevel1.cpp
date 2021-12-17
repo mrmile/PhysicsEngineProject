@@ -29,7 +29,7 @@ bool SceneLevel1::Start()
 	bgTextureL1 = App->textures->Load("Assets/Background.png");
 	
 
-	level = App->textures->Load("Assets/mapWormspng.png");
+	level = App->textures->Load("Assets/mapWormspng_v2.png");
 
 	App->audio->PlayMusic("Assets/_.ogg", 1.0f);
 
