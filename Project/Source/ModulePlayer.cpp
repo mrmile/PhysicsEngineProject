@@ -29,7 +29,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	idleLeftAnim.loop = true;
 	idleLeftAnim.speed = 0.15f;
 
-	// idle left
+	// idle Right
 	idleRightAnim.PushBack({ 190, 207, 28, 33 });
 	idleRightAnim.PushBack({ 163, 207, 28, 33 });
 	idleRightAnim.PushBack({ 136, 207, 28, 33 });
@@ -41,7 +41,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	idleRightAnim.loop = true;
 	idleRightAnim.speed = 0.15f;
 
-	// move left
+	// Move left
 	leftAnim.PushBack({ 1, 7, 28, 33 });
 	leftAnim.PushBack({ 28, 7, 28, 33 });
 	leftAnim.PushBack({ 55, 7, 28, 33 });
@@ -81,7 +81,7 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/player.png");
+	texture = App->textures->Load("Assets/RedCharacter.png");
 	currentAnimation = &idleRightAnim;
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
