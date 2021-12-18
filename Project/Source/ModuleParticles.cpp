@@ -34,11 +34,17 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
-	laser.anim.PushBack({ 232, 103, 16, 12 });
-	laser.anim.PushBack({ 249, 103, 16, 12 });
-	laser.speed.x = 5;
-	laser.lifetime = 180;
-	laser.anim.speed = 0.2f;
+	shootLeft.anim.PushBack({ 232, 103, 16, 12 });
+	shootLeft.anim.PushBack({ 249, 103, 16, 12 });
+	shootLeft.speed.x = -3;
+	explosion.anim.loop = true;
+	shootLeft.anim.speed = 0.2f;
+
+	shootRight.anim.PushBack({ 232, 103, 16, 12 });
+	shootRight.anim.PushBack({ 249, 103, 16, 12 });
+	shootRight.speed.x = 3;
+	shootRight.anim.loop = true;
+	shootRight.anim.speed = 0.2f;
 
 	return true;
 }

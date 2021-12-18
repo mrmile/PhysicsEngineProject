@@ -189,6 +189,13 @@ Update_Status ModulePlayer::Update()
 	}
 	//else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_UP)App->player->fy = 0.0f;
 
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+	{
+		if(PlayerLookingPosition == 1) App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+		if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+
+	}
+
 	// If no up/down movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
