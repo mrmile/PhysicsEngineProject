@@ -125,8 +125,8 @@ Update_Status ModulePhysics::Update()
 	//cout << App->player->position.x << endl;
 	//cout << App->player->position.y << endl << endl;
 
-	//LOG("Player X: %i\n", App->player->position.x);
-	//LOG("Player Y: %i\n", App->player->position.y);
+	//LOG("Player vX: %i\n", App->player->vx);
+	LOG("Player vY: %i\n", App->player->vy);
 
 	// Step #4: solve collisions <-- En el apartado de collisions de la entidad
 	/*

@@ -149,7 +149,7 @@ Update_Status ModulePlayer::Update()
 
 		PlayerLookingPosition = 1;
 	}
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_UP)App->player->fx = 1.0f;
+	//else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_UP)App->player->fx = 0.0f;
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
 	{
@@ -164,10 +164,19 @@ Update_Status ModulePlayer::Update()
 
 		PlayerLookingPosition = 2;
 	}
-	else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_UP)App->player->fx = -1.0f;
+	//else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_UP)App->player->fx = 0.0f;
 
 	if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && position.y >= 227)
 	{
+		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+		{
+			//App->player->fx = 0.0f;
+			ax = 0;
+			//vx = 0;
+			//if (fx == 0) vx = 0;
+		}
+
 		if (currentAnimation != &jumpAnim)
 		{
 			jumpAnim.Reset();
@@ -210,7 +219,67 @@ Update_Status ModulePlayer::Update()
 			break;
 		}
 	}
-
+	
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+	{
+		if (vx < 0 && position.y >= 227)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (vx != 0)App->player->fx = 1.0f;
+			if (vx == 0)App->player->fx = 0.0;
+		}
+		if (vx > 0 && position.y >= 227)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (vx != 0)App->player->fx = -1.0f;
+			if (vx == 0)App->player->fx = 0.0;
+		}
+		if (vx == 0)App->player->fx = 0.0;
+	}
+	
+	/*
+	if (vx < 0 && position.y >= 227 && App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+	{
+		//App->player->vx = 0.0;
+		//App->player->ax = 0.0;
+		if (vx != 0)App->player->fx = 1.0f;
+		if (vx == 0)App->player->fx = 0.0;
+	}
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE && vx > 0 && position.y >= 227)
+	{
+		//App->player->vx = 0.0;
+		//App->player->ax = 0.0;
+		if (vx != 0)App->player->fx = -1.0f;
+		if (vx == 0)App->player->fx = 0.0;
+	}
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+	{
+		App->player->fx = 0.0;
+	}
+	*/
+	// Ff = c*m*g;
+	/*
+	if (PlayerLookingPosition == 1 && position.y >= 227)
+	{
+		//App->player->vx = 0.0;
+		//App->player->ax = 0.0;
+		if (vx != 0)App->player->fx = 1.0f;
+		if (vx == 0)App->player->fx = 0.0;
+	}
+	if (PlayerLookingPosition == 2 && position.y >= 227)
+	{
+		//App->player->vx = 0.0;
+		//App->player->ax = 0.0;
+		if (vx != 0)App->player->fx = -1.0f;
+		if (vx == 0)App->player->fx = 0.0;
+	}
+	*/
+	
+	//if (vx == 0 && position.y >= 227) App->player->fx = 0.0;
 	/*
 	if ((PlayerLookingPosition == 1) && (position.x < App->render->camera.x / SCREEN_SIZE + 190))
 	{
@@ -253,8 +322,6 @@ Update_Status ModulePlayer::Update()
 	}
 	*/
 
-	//if (position.y >= 228) position.y = 228;
-
 	currentAnimation->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -266,6 +333,11 @@ Update_Status ModulePlayer::PostUpdate()
 	{
 		
 	}
+
+	if (position.y >= 228) position.y = 228;
+
+	if (position.x >= 365) position.x = 365;
+	if (position.x <= -15) position.x = -15;
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	App->render->Blit(texture, position.x, position.y, &rect);
@@ -312,20 +384,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->player->fy = 0.0;
 		}
 
-		if (PlayerLookingPosition == 1)
-		{
-			//App->player->vx = 0.0;
-			//App->player->ax = 0.0;
-			if(ax != 0)App->player->fx = 1.0;
-			//if (vx == 0)App->player->fx = 0.0;
-		}
-		if (PlayerLookingPosition == 2)
-		{
-			//App->player->vx = 0.0;
-			//App->player->ax = 0.0;
-			if (ax != 0)App->player->fx = -1.0;
-			//if (vx == 0)App->player->fx = 0.0;
-		}
 		App->player->touchingGround = true;
 	}
 	else
