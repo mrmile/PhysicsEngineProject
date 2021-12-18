@@ -135,196 +135,208 @@ Update_Status ModulePlayer::Update()
 	playerTimer++;
 
 	collider->SetPos(position.x + 10, position.y + 6);
-
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_REPEAT) App->sceneLevel_1->TURN = 0;
+	if (App->sceneLevel_1->TURN == 0)
 	{
-		if (currentAnimation != &leftAnim)
+		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
 		{
-			leftAnim.Reset();
-			currentAnimation = &leftAnim;
+			if (currentAnimation != &leftAnim)
+			{
+				leftAnim.Reset();
+				currentAnimation = &leftAnim;
+			}
+			speed_F = 1;
+			//position.x--;
+			App->player->fx = -1.0f;
+
+			PlayerLookingPosition = 1;
 		}
-		speed_F = 1;
-		//position.x--;
-		App->player->fx = -1.0f;
+		//else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_UP)App->player->fx = 0.0f;
 
-		PlayerLookingPosition = 1;
-	}
-	//else if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_UP)App->player->fx = 0.0f;
-
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
-	{
-		if (currentAnimation != &rightAnim)
+		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
 		{
-			rightAnim.Reset();
-			currentAnimation = &rightAnim;
+			if (currentAnimation != &rightAnim)
+			{
+				rightAnim.Reset();
+				currentAnimation = &rightAnim;
+			}
+			speed_F = 1;
+			//position.x++;
+			App->player->fx = 1.0f;
+
+			PlayerLookingPosition = 2;
 		}
-		speed_F = 1;
-		//position.x++;
-		App->player->fx = 1.0f;
+		//else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_UP)App->player->fx = 0.0f;
 
-		PlayerLookingPosition = 2;
-	}
-	//else if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_UP)App->player->fx = 0.0f;
+		if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && position.y >= 227)
+		{
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+				&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+			{
+				//App->player->fx = 0.0f;
+				ax = 0;
+				//vx = 0;
+				//if (fx == 0) vx = 0;
+			}
 
-	if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_REPEAT && position.y >= 227)
-	{
+			if (currentAnimation != &jumpAnim)
+			{
+				jumpAnim.Reset();
+				currentAnimation = &jumpAnim;
+			}
+			speed_F = 1;
+			//position.x++;
+			App->player->fy = -1.2f;
+
+		}
+		//else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_UP)App->player->fy = 0.0f;
+
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+		{
+			if (PlayerLookingPosition == 1) App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+			if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+
+		}
+
+		// If no up/down movement detected, set the current animation back to idle
+		if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+		{
+			playerIdleAnimationTimer++;
+			speed_F = 0;
+			App->player->fx = 0.0f;
+
+			switch (PlayerLookingPosition)
+			{
+			case 1:
+				if (currentAnimation != &idleLeftAnim)
+				{
+					idleLeftAnim.Reset();
+					currentAnimation = &idleLeftAnim;
+				}
+
+				break;
+			case 2:
+				if (currentAnimation != &idleRightAnim)
+				{
+					idleRightAnim.Reset();
+					currentAnimation = &idleRightAnim;
+				}
+
+				break;
+			}
+		}
+
 		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
 			&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
 		{
-			//App->player->fx = 0.0f;
-			ax = 0;
-			//vx = 0;
-			//if (fx == 0) vx = 0;
-		}
-
-		if (currentAnimation != &jumpAnim)
-		{
-			jumpAnim.Reset();
-			currentAnimation = &jumpAnim;
-		}
-		speed_F = 1;
-		//position.x++;
-		App->player->fy = -1.2f;
-
-	}
-	//else if (App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_UP)App->player->fy = 0.0f;
-
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
-	{
-		if(PlayerLookingPosition == 1) App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
-		if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
-
-	}
-
-	// If no up/down movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_DOWN] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_UP] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
-	{
-		playerIdleAnimationTimer++;
-		speed_F = 0;
-		App->player->fx = 0.0f;
-		
-		switch (PlayerLookingPosition)
-		{
-		case 1:
-			if (currentAnimation != &idleLeftAnim)
+			if (vx < 0)
 			{
-				idleLeftAnim.Reset();
-				currentAnimation = &idleLeftAnim;
+				fx = App->modulePhysics->DragForceLeft(vx);
+			}
+			if (vx > 0)
+			{
+				fx = App->modulePhysics->DragForceRight(vx);
+			}
+		}
+		if (App->input->keys[SDL_SCANCODE_0] == Key_State::KEY_REPEAT)
+		{
+			App->sceneLevel_1->TURN = 1;
+		}
+		/*
+		if (vx < 0 && position.y >= 227 && App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (vx != 0)App->player->fx = 1.0f;
+			if (vx == 0)App->player->fx = 0.0;
+		}
+		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE && vx > 0 && position.y >= 227)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (vx != 0)App->player->fx = -1.0f;
+			if (vx == 0)App->player->fx = 0.0;
+		}
+		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+			&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+		{
+			App->player->fx = 0.0;
+		}
+		*/
+		// Ff = c*m*g;
+		/*
+		if (PlayerLookingPosition == 1 && position.y >= 227)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (vx != 0)App->player->fx = 1.0f;
+			if (vx == 0)App->player->fx = 0.0;
+		}
+		if (PlayerLookingPosition == 2 && position.y >= 227)
+		{
+			//App->player->vx = 0.0;
+			//App->player->ax = 0.0;
+			if (vx != 0)App->player->fx = -1.0f;
+			if (vx == 0)App->player->fx = 0.0;
+		}
+		*/
+
+		//if (vx == 0 && position.y >= 227) App->player->fx = 0.0;
+		/*
+		if ((PlayerLookingPosition == 1) && (position.x < App->render->camera.x / SCREEN_SIZE + 190))
+		{
+			App->render->camera.x -= 5;
+		}
+		if ((PlayerLookingPosition == 2) && (position.x > App->render->camera.x / SCREEN_SIZE + 140))
+		{
+			App->render->camera.x += 5;
+		}
+		*/
+
+		/*
+		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
+		{
+
+			if (App->render->camera.x / SCREEN_SIZE + App->render->camera.w + speed < 1242)
+			{
+
+				if (position.x + 70 > App->render->camera.x / SCREEN_SIZE + App->render->camera.w - horizontalMargin)
+				{
+					App->render->camera.x += speed + (SCREEN_SIZE - 1);
+				}
+
 			}
 
-			break;
-		case 2:
-			if (currentAnimation != &idleRightAnim)
-			{
-				idleRightAnim.Reset();
-				currentAnimation = &idleRightAnim;
-			}
-
-			break;
 		}
+		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
+		{
+
+
+			if (App->render->camera.x / SCREEN_SIZE - App->render->camera.w - speed < 1242)
+			{
+
+				if (position.x - 285 < App->render->camera.x / SCREEN_SIZE - App->render->camera.w + horizontalMargin)
+				{
+					App->render->camera.x -= speed + (SCREEN_SIZE - 1);
+				}
+
+			}
+		}
+		*/
+
+		currentAnimation->Update();
+
+		return Update_Status::UPDATE_CONTINUE;
+	}
+	else
+	{
+		currentAnimation = &idleLeftAnim;
+		return Update_Status::UPDATE_CONTINUE;
 	}
 	
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
-	{
-		if (vx < 0)
-		{
-			fx = App->modulePhysics->DragForceLeft(vx);
-		}
-		if (vx > 0)
-		{
-			fx = App->modulePhysics->DragForceRight(vx);
-		}
-	}
-	
-	/*
-	if (vx < 0 && position.y >= 227 && App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
-	{
-		//App->player->vx = 0.0;
-		//App->player->ax = 0.0;
-		if (vx != 0)App->player->fx = 1.0f;
-		if (vx == 0)App->player->fx = 0.0;
-	}
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE && vx > 0 && position.y >= 227)
-	{
-		//App->player->vx = 0.0;
-		//App->player->ax = 0.0;
-		if (vx != 0)App->player->fx = -1.0f;
-		if (vx == 0)App->player->fx = 0.0;
-	}
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
-	{
-		App->player->fx = 0.0;
-	}
-	*/
-	// Ff = c*m*g;
-	/*
-	if (PlayerLookingPosition == 1 && position.y >= 227)
-	{
-		//App->player->vx = 0.0;
-		//App->player->ax = 0.0;
-		if (vx != 0)App->player->fx = 1.0f;
-		if (vx == 0)App->player->fx = 0.0;
-	}
-	if (PlayerLookingPosition == 2 && position.y >= 227)
-	{
-		//App->player->vx = 0.0;
-		//App->player->ax = 0.0;
-		if (vx != 0)App->player->fx = -1.0f;
-		if (vx == 0)App->player->fx = 0.0;
-	}
-	*/
-	
-	//if (vx == 0 && position.y >= 227) App->player->fx = 0.0;
-	/*
-	if ((PlayerLookingPosition == 1) && (position.x < App->render->camera.x / SCREEN_SIZE + 190))
-	{
-		App->render->camera.x -= 5;
-	}
-	if ((PlayerLookingPosition == 2) && (position.x > App->render->camera.x / SCREEN_SIZE + 140))
-	{
-		App->render->camera.x += 5;
-	}
-	*/
-
-	/*
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
-	{
-
-		if (App->render->camera.x / SCREEN_SIZE + App->render->camera.w + speed < 1242)
-		{
-
-			if (position.x + 70 > App->render->camera.x / SCREEN_SIZE + App->render->camera.w - horizontalMargin)
-			{
-				App->render->camera.x += speed + (SCREEN_SIZE - 1);
-			}
-
-		}
-
-	}
-	if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
-	{
-
-
-		if (App->render->camera.x / SCREEN_SIZE - App->render->camera.w - speed < 1242)
-		{
-
-			if (position.x - 285 < App->render->camera.x / SCREEN_SIZE - App->render->camera.w + horizontalMargin)
-			{
-				App->render->camera.x -= speed + (SCREEN_SIZE - 1);
-			}
-
-		}
-	}
-	*/
-
-	currentAnimation->Update();
-
-	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModulePlayer::PostUpdate()

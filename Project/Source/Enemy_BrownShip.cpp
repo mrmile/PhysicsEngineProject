@@ -8,7 +8,8 @@
 #include "ModulePhysics.h"
 #include "ModuleAudio.h"
 #include "p2Point.h"
-#include "ModuleInput.h""
+#include "ModuleInput.h"
+#include "SceneLevel1.h"
 
 Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 {
@@ -73,7 +74,7 @@ Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 	ay = 0.0f; //
 	fx = 0.0f;
 	fy = 0.0f;
-	dt = 0.0f; //
+	dt = 1.0f; //
 
 
 	mass = 10.0f;
@@ -83,12 +84,13 @@ Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 
 	forceTimerX = 0.0f;
 
-	collider = App->collisions->AddCollider({position.x, position.y, 24, 24}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({position.x+10, position.y+6, 16, 30}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_BrownShip::Update()
 {
-	collider->SetPos(position.x, position.y);
+	Enemy_Counter++;
+	collider->SetPos(position.x+10, position.y+6);
 	currentAnim = &idleRightAnim;
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
@@ -96,6 +98,5 @@ void Enemy_BrownShip::Update()
 	{
 		SetToDelete();
 	}
-
 	Enemy::Update();
 }

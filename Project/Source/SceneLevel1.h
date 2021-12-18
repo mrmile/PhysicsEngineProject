@@ -56,6 +56,7 @@ public:
 	int bgTextureL4X2 = 0;
 	int bgTextureL4X3 = 0;
 
+	int TURN = 0;
 };
 
 #endif

@@ -37,7 +37,7 @@ public:
 	// The current position in the world
 	iPoint position;
 	int EnemyHp;
-
+	int Enemy_Counter;
 	//Physics addition sort of
 
 	float dt;
