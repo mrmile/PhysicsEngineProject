@@ -5,6 +5,7 @@
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
+#include "ModulePhysics.h"
 #include "ModuleAudio.h"
 #include "p2Point.h"
 #include "ModuleInput.h""
@@ -64,7 +65,24 @@ Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 	jumpAnim.loop = true;
 	jumpAnim.speed = 0.1f;
 
-	
+	x = 0.0f;
+	y = 0.0f;
+	vx = 0.0f;
+	vy = 0.0f;
+	ax = 0.0f; //
+	ay = 0.0f; //
+	fx = 0.0f;
+	fy = 0.0f;
+	dt = 0.0f; //
+
+
+	mass = 10.0f;
+	surface = 2.0f;
+	cd = 0.4f;
+	cl = 1.2f;
+
+	forceTimerX = 0.0f;
+
 	collider = App->collisions->AddCollider({position.x, position.y, 24, 24}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
@@ -78,5 +96,6 @@ void Enemy_BrownShip::Update()
 	{
 		SetToDelete();
 	}
+
 	Enemy::Update();
 }

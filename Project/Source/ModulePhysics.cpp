@@ -11,6 +11,8 @@
 #include "ModuleFonts.h"
 #include "SceneLevel1.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
+#include "Enemy.h"
 
 #include <iostream>
 using namespace std;
@@ -44,8 +46,8 @@ bool ModulePhysics::Start()
 	mass = 0;
 	surface = 0;
 	cd = 0;
-	
 
+	
 	timeCounter = 0;
 
 	return true;
@@ -139,7 +141,29 @@ Update_Status ModulePhysics::Update()
 		App->player->physics_enabled = false;
 	}
 	*/
+	
+	//Enemies physics had to change the enemies list to public
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (App->enemies->enemies[i] != nullptr)
+		{
+			double fgx_enemies = App->enemies->enemies[i]->mass * 0.0f;
+			double fgy_enemies = App->enemies->enemies[i]->mass * 0.005f;
 
+
+			App->enemies->enemies[i]->fx += fgx_enemies;
+			App->enemies->enemies[i]->fy += fgy_enemies;
+			dt = 1;
+			App->enemies->enemies[i]->ax = App->enemies->enemies[i]->fx / App->enemies->enemies[i]->mass;
+			App->enemies->enemies[i]->ay = App->enemies->enemies[i]->fy / App->enemies->enemies[i]->mass;
+
+			App->enemies->enemies[i]->position.x += App->enemies->enemies[i]->vx * dt + 0.5 * App->enemies->enemies[i]->ax * dt * dt;
+			App->enemies->enemies[i]->position.y += App->enemies->enemies[i]->vy * dt + 0.5 * App->enemies->enemies[i]->ay * dt * dt;
+			App->enemies->enemies[i]->vx += App->enemies->enemies[i]->ax * dt;
+			App->enemies->enemies[i]->vy += App->enemies->enemies[i]->ay * dt;
+		}
+	}
+	
 	return Update_Status::UPDATE_CONTINUE;
 }
 

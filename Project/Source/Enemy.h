@@ -36,8 +36,45 @@ public:
 public:
 	// The current position in the world
 	iPoint position;
-
 	int EnemyHp;
+
+	//Physics addition sort of
+
+	float dt;
+
+	double x;
+	double y;
+
+	// Velocity
+	double vx;
+	double vy;
+
+	// Acceleration
+	double ax;
+	double ay;
+
+	// Force (total) applied to the ball
+	double fx;
+	double fy;
+
+	//friction force on x axis
+	double ffx = 0;
+
+	// Mass
+	double mass;
+
+	// Aerodynamics stuff
+	double surface; // Effective wet surface
+	double cl; // Lift coefficient
+	double cd; // Drag coefficient
+
+	// Has physics enabled?
+	bool physics_enabled = true;
+
+	bool touchingGround = false;
+
+	float forceTimerX;
+
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
 

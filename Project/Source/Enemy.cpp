@@ -45,6 +45,13 @@ void Enemy::OnCollision(Collider* collider)
 		App->audio->PlayFx(destroyedFx);
 		EnemyHp = 0;
 	}
+	if (collider->type == Collider::Type::WALL)
+	{
+		position.y = 227;
+		vy = 0.0;
+		ay = 0.0;
+		fy = 0.0;
+	}
 	
 }
 

@@ -64,6 +64,9 @@ public:
 
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
+public:
+	// All spawned enemies in the scene
+	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 private:
 	// Spawns a new enemy using the data from the queue
@@ -72,9 +75,6 @@ private:
 private:
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
-
-	// All spawned enemies in the scene
-	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;

@@ -45,6 +45,7 @@ public:
 	float DragForceLeft(double velocity);
 	float DragForceRight(double velocity);
 
+	
 	//inline bool IsEnabled() const { return isEnabled; }
 
 	
