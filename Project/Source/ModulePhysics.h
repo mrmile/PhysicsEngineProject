@@ -42,7 +42,8 @@ public:
 
 	float ReduceForce(float force, float objectMass, float& t);
 
-	float DragForce(double velocity);
+	float DragForceLeft(double velocity);
+	float DragForceRight(double velocity);
 
 	//inline bool IsEnabled() const { return isEnabled; }
 
