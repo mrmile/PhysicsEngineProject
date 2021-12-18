@@ -189,7 +189,7 @@ float ModulePhysics::ReduceForce(float force, float objectMass, float& t)
 float ModulePhysics::DragForce(double velocity)
 {
 	float force;
-	float dragCoeficient = 0.23;
+	float dragCoeficient = 0.23; //Los valores deberían estar entre 0.21 - 0.25
 
 	force = -dragCoeficient * velocity;
 

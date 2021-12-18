@@ -230,21 +230,7 @@ Update_Status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
 	{
-		if (vx < 0 && position.y >= 227)
-		{
-			//App->player->vx = 0.0;
-			//App->player->ax = 0.0;
-			if (vx != 0)App->player->fx = 1.0f;
-			if (vx == 0)App->player->fx = 0.0;
-		}
-		if (vx > 0 && position.y >= 227)
-		{
-			//App->player->vx = 0.0;
-			//App->player->ax = 0.0;
-			if (vx != 0)App->player->fx = -1.0f;
-			if (vx == 0)App->player->fx = 0.0;
-		}
-		if (vx == 0)App->player->fx = 0.0;
+		fx = App->modulePhysics->DragForce(vx);
 	}
 	
 	/*
