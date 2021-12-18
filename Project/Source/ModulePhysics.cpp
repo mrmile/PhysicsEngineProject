@@ -93,7 +93,7 @@ Update_Status ModulePhysics::Update()
 
 	// Add gravity force to the total accumulated force of the player
 	App->player->fx += fgx;
-	App->player->fy += fgy;
+	if(App->player->touchingGround==false)App->player->fy += fgy;
 	dt = 1;
 
 	// Compute Aerodynamic Lift & Drag forces (not done yet)
@@ -114,15 +114,15 @@ Update_Status ModulePhysics::Update()
 
 // Step #2: 2nd Newton's Law: SUM_Forces = mass * accel --> accel = SUM_Forces / mass
 	App->player->ax = App->player->fx / App->player->mass;
-	App->player->ay = App->player->fy / App->player->mass;
+	if (App->player->touchingGround == false)App->player->ay = App->player->fy / App->player->mass;
 
 	// Step #3: Integrate --> from accel to new velocity & new position. 
 	// We will use the 2nd order "Velocity Verlet" method for integration.
 	// You can also move this code into a subroutine: integrator_velocity_verlet(player, dt);
 	App->player->position.x += App->player->vx * dt + 0.5 * App->player->ax * dt * dt;
-	App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
+	if (App->player->touchingGround == false)App->player->position.y += App->player->vy * dt + 0.5 * App->player->ay * dt * dt;
 	App->player->vx += App->player->ax * dt;
-	App->player->vy += App->player->ay * dt;
+	if (App->player->touchingGround == false)App->player->vy += App->player->ay * dt;
 
 	//cout << App->player->position.x << endl;
 	//cout << App->player->position.y << endl << endl;
@@ -152,15 +152,15 @@ Update_Status ModulePhysics::Update()
 
 
 			App->enemies->enemies[i]->fx += fgx_enemies;
-			App->enemies->enemies[i]->fy += fgy_enemies;
+			if(App->enemies->enemies[i]->touchingGround ==false) App->enemies->enemies[i]->fy += fgy_enemies;
 			dt = 1;
 			App->enemies->enemies[i]->ax = App->enemies->enemies[i]->fx / App->enemies->enemies[i]->mass;
-			App->enemies->enemies[i]->ay = App->enemies->enemies[i]->fy / App->enemies->enemies[i]->mass;
+			if (App->enemies->enemies[i]->touchingGround == false)App->enemies->enemies[i]->ay = App->enemies->enemies[i]->fy / App->enemies->enemies[i]->mass;
 
 			App->enemies->enemies[i]->position.x += App->enemies->enemies[i]->vx * dt + 0.5 * App->enemies->enemies[i]->ax * dt * dt;
-			App->enemies->enemies[i]->position.y += App->enemies->enemies[i]->vy * dt + 0.5 * App->enemies->enemies[i]->ay * dt * dt;
+			if (App->enemies->enemies[i]->touchingGround == false)App->enemies->enemies[i]->position.y += App->enemies->enemies[i]->vy * dt + 0.5 * App->enemies->enemies[i]->ay * dt * dt;
 			App->enemies->enemies[i]->vx += App->enemies->enemies[i]->ax * dt;
-			App->enemies->enemies[i]->vy += App->enemies->enemies[i]->ay * dt;
+			if (App->enemies->enemies[i]->touchingGround == false)App->enemies->enemies[i]->vy += App->enemies->enemies[i]->ay * dt;
 		}
 	}
 	
