@@ -38,7 +38,8 @@ public:
 	iPoint position;
 	int EnemyHp;
 	int Enemy_Counter;
-	//Physics addition sort of
+
+	//Physics addition 
 
 	float dt;
 

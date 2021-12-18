@@ -333,6 +333,8 @@ Update_Status ModulePlayer::Update()
 	}
 	else
 	{
+		speed_F = 0;
+		App->player->fx = 0.0f;
 		currentAnimation = &idleLeftAnim;
 		return Update_Status::UPDATE_CONTINUE;
 	}

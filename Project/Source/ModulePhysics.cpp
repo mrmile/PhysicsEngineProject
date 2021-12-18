@@ -164,6 +164,27 @@ Update_Status ModulePhysics::Update()
 		}
 	}
 	
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (App->particles->particles[i] != nullptr)
+		{
+			double fgx_particles = App->particles->particles[i]->mass * 0.0f;
+			double fgy_particles = App->particles->particles[i]->mass * 0.005f;
+
+
+			App->particles->particles[i]->fx += fgx_particles;
+			App->particles->particles[i]->fy += fgy_particles;
+			dt = 1;
+			App->particles->particles[i]->ax = App->particles->particles[i]->fx / App->particles->particles[i]->mass;
+			App->particles->particles[i]->ay = App->particles->particles[i]->fy / App->particles->particles[i]->mass;
+
+			App->particles->particles[i]->position.x += App->particles->particles[i]->vx * dt + 0.5 * App->particles->particles[i]->ax * dt * dt;
+			App->particles->particles[i]->position.y += App->particles->particles[i]->vy * dt + 0.5 * App->particles->particles[i]->ay * dt * dt;
+			App->particles->particles[i]->vx += App->particles->particles[i]->ax * dt;
+			App->particles->particles[i]->vy += App->particles->particles[i]->ay * dt;
+		}
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
