@@ -2,25 +2,81 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModulePlayer.h"
+#include "ModuleEnemies.h"
+#include "ModuleParticles.h"
+#include "ModuleAudio.h"
+#include "p2Point.h"
+#include "ModuleInput.h""
 
 Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({5,72,21,22});
-	currentAnim = &fly;
+	Enemy::EnemyHp = 2;
+	position.x = 150;
+	position.y = 157;
+
+	// idle left
+	idleLeftAnim.PushBack({ 2, 0, 31, 39 });
+	idleLeftAnim.PushBack({ 32, 0, 30, 39 });
+	idleLeftAnim.PushBack({ 61, 0, 30, 39 });
+	idleLeftAnim.loop = true;
+	idleLeftAnim.speed = 0.1f;
+
+	// idle Right
+	idleRightAnim.PushBack({ 717, 0, 31, 39 });
+	idleRightAnim.PushBack({ 687, 0, 30, 39 });
+	idleRightAnim.PushBack({ 658, 0, 30, 39 });
+	idleRightAnim.loop = true;
+	idleRightAnim.speed = 0.1f;
+
+	// Move left
+	leftAnim.PushBack({ 1, 7, 28, 33 });
+	leftAnim.PushBack({ 28, 7, 28, 33 });
+	leftAnim.PushBack({ 55, 7, 28, 33 });
+	leftAnim.PushBack({ 82, 7, 28, 33 });
+	leftAnim.PushBack({ 109, 7, 28, 33 });
+	leftAnim.PushBack({ 136, 7, 28, 33 });
+	leftAnim.PushBack({ 163, 7, 28, 33 });
+	leftAnim.PushBack({ 190, 7, 28, 33 });
+	leftAnim.PushBack({ 217, 7, 28, 33 });
+	leftAnim.PushBack({ 244, 7, 28, 33 });
+	leftAnim.loop = true;
+	leftAnim.speed = 0.3f;
+
+	// Move right
+	rightAnim.PushBack({ 244, 47, 28, 33 });
+	rightAnim.PushBack({ 217, 47, 28, 33 });
+	rightAnim.PushBack({ 190, 47, 28, 33 });
+	rightAnim.PushBack({ 163, 47, 28, 33 });
+	rightAnim.PushBack({ 136, 47, 28, 33 });
+	rightAnim.PushBack({ 109, 47, 28, 33 });
+	rightAnim.PushBack({ 82, 47, 28, 33 });
+	rightAnim.PushBack({ 55, 47, 28, 33 });
+	rightAnim.PushBack({ 28, 47, 28, 33 });
+	rightAnim.PushBack({ 1, 47, 28, 33 });
+	rightAnim.loop = true;
+	rightAnim.speed = 0.3f;
+
+	// jump
+	jumpAnim.PushBack({ 717, 0, 31, 39 });
+	jumpAnim.PushBack({ 687, 0, 30, 39 });
+	jumpAnim.PushBack({ 658, 0, 30, 39 });
+	jumpAnim.loop = true;
+	jumpAnim.speed = 0.1f;
+
 	
-	path.PushBack({-1.0f, -0.5f}, 100);
-	path.PushBack({-1.0f, 0.5f}, 80);
-	path.PushBack({-1.0f, 1.0f}, 80);
-	
-	collider = App->collisions->AddCollider({0, 0, 24, 24}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({position.x, position.y, 24, 24}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_BrownShip::Update()
 {
-	path.Update();
-	position = spawnPos + path.GetRelativePosition();
-
+	collider->SetPos(position.x, position.y);
+	currentAnim = &idleRightAnim;
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
+	if (EnemyHp == 0)
+	{
+		SetToDelete();
+	}
 	Enemy::Update();
 }

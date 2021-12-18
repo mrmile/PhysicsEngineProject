@@ -8,6 +8,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleInteractiveObj.h"
 #include "ModulePlayer.h"
+#include "Enemy_BrownShip.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
@@ -40,10 +41,11 @@ bool SceneLevel1::Start()
 
 	App->collisions->debug = true;
 	
+	
 
 	App->render->camera.x = 10;
 	App->render->camera.y = 150;
-	
+	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 150, 157);
 	App->collisions->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
@@ -55,7 +57,7 @@ bool SceneLevel1::Start()
 Update_Status SceneLevel1::Update()
 {
 	/*App->render->camera.x += 3;*/
-
+	
 	return Update_Status::UPDATE_CONTINUE;
 }
 

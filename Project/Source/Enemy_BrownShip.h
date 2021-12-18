@@ -2,7 +2,7 @@
 #define __ENEMY_BROWNSHIP_H__
 
 #include "Enemy.h"
-#include "Path.h"
+
 
 class Enemy_BrownShip : public Enemy
 {
@@ -16,13 +16,14 @@ public:
 	void Update() override;
 
 private:
-	// A set of steps that define the position in the screen
-	// And an animation for each step
-	Path path;
+	
+	Animation idleRightAnim;
+	Animation idleLeftAnim;
 
-	// This enemy has one sprite and one frame
-	// We are keeping it an animation for consistency with other enemies
-	Animation fly;
+	Animation rightAnim;
+	Animation leftAnim;
+
+	Animation jumpAnim;
 };
 
 #endif // __ENEMY_BROWNSHIP_H__

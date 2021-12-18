@@ -24,7 +24,7 @@ bool Particle::Update()
 {
 	bool ret = true;
 	frameCount++;
-
+	
 	// The particle is set to 'alive' when the delay has been reached
 	if (!isAlive && frameCount >= 0)
 		isAlive = true;
