@@ -28,7 +28,7 @@ bool ModuleParticles::Start()
 
 	// Particle Examples
 
-	// unfinished
+	// Red Explosion
 	explosionRed.anim.PushBack({ 4, 284, 39, 91 });
 	explosionRed.anim.PushBack({ 50, 287, 45, 90 });
 	explosionRed.anim.PushBack({ 103, 286, 46, 92 });
@@ -53,7 +53,7 @@ bool ModuleParticles::Start()
 	explosionRed.anim.speed = 0.3f;
 	explosionRed.lifetime = 25;
 
-	// finished
+	// Blue Explosion
 	explosionBlue.anim.PushBack({ 706, 284, 39, 91 });
 	explosionBlue.anim.PushBack({ 655, 287, 45, 90 });
 	explosionBlue.anim.PushBack({ 602, 286, 44, 91 });
