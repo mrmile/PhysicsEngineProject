@@ -9,6 +9,7 @@
 #include "ModuleInteractiveObj.h"
 #include "ModulePlayer.h"
 #include "Enemy_BrownShip.h"
+#include "Enemy.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
@@ -43,6 +44,7 @@ bool SceneLevel1::Start()
 	
 	TURN = 1;
 	turnDelay = 0;
+	destroyedDelay = 0;
 
 	App->render->camera.x = 10;
 	App->render->camera.y = 150;
@@ -70,6 +72,11 @@ Update_Status SceneLevel1::PostUpdate()
 	App->render->Blit(bgTexture, -35, 30, NULL, 0.6f);
 	
 	App->render->Blit(level, -1, 0, NULL, 1.0f);
+
+	if (destroyedDelay > 320)
+	{
+		//Fade out to titleScreen
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

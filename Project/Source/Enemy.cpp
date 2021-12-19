@@ -5,6 +5,8 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
+#include "SceneLevel1.h"
+#include "ModulePlayer.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
@@ -81,18 +83,25 @@ void Enemy::OnCollision(Collider* collider)
 		EnemyHp -= 10;
 		if (EnemyHp < 0) EnemyHp = 0;
 
-		//if (playerHP != 0) app->audio->PlayFx(damaged);
+		//if (enemyHP != 0) app->audio->PlayFx(damaged);
 
 		if (EnemyHp <= 0)
 		{
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 			//invincibleDelay = 121;
 			EnemyHp = 0;
-			//app->audio->PlayFx(dead);
+			App->audio->PlayFx(App->player->winMusicFx);
 			destroyed = true;
 
+			App->render->Blit(App->sceneLevel_1->youWin, 100, 50, NULL);
+			App->sceneLevel_1->destroyedDelay++;
+
 		}
-		else destroyed = false;
+		else
+		{
+			destroyed = false;
+			App->sceneLevel_1->destroyedDelay = 0;
+		}
 	}
 	if (collider->type == Collider::Type::WALL)
 	{

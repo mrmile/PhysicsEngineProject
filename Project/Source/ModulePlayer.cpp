@@ -87,6 +87,8 @@ bool ModulePlayer::Start()
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	winMusicFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	looseMusicFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	position.x = 200;
 	position.y = 157;
@@ -475,9 +477,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		{
 			//invincibleDelay = 121;
 			playerHP = 0;
-			//app->audio->PlayFx(dead);
+			App->audio->PlayFx(looseMusicFx);
+			App->render->Blit(App->sceneLevel_1->youloose, 100, 50, NULL);
 			destroyed = true;
-
+			App->sceneLevel_1->destroyedDelay++;
+		}
+		else
+		{
+			destroyed = false;
+			App->sceneLevel_1->destroyedDelay = 0;
 		}
 	}
 }

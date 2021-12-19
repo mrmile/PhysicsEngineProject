@@ -61,6 +61,7 @@ public:
 
 	int TURN = 0;
 	int turnDelay;
+	int destroyedDelay;
 };
 
 #endif
