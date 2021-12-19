@@ -57,6 +57,7 @@ bool SceneLevel1::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->interactiveObj->Enable();
+	App->particles->Enable();
 
 	return ret;
 }

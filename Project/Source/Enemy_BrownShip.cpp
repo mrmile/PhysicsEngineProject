@@ -68,6 +68,12 @@ Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 	jumpAnim.loop = true;
 	jumpAnim.speed = 0.1f;
 
+	deadAnim.PushBack({ 717, 0, 31, 39 });
+	deadAnim.PushBack({ 687, 0, 30, 39 });
+	deadAnim.PushBack({ 658, 0, 30, 39 });
+	deadAnim.loop = true;
+	deadAnim.speed = 0.1f;
+
 	x = 0.0f;
 	y = 0.0f;
 	vx = 0.0f;
@@ -97,7 +103,7 @@ void Enemy_BrownShip::Update()
 	collider->SetPos(position.x+10, position.y+6);
 	currentAnim = &idleRightAnim;
 	if (App->sceneLevel_1->turnDelay < 120) hasShot = false;
-	if (App->sceneLevel_1->TURN == 2 && App->sceneLevel_1->turnDelay > 120)
+	if (App->sceneLevel_1->TURN == 2 && App->sceneLevel_1->turnDelay > 120 && destroyed == false)
 	{
 		//ADD TURN THINGS HERE
 		if (position.x > App->player->position.x && hasShot==false)
@@ -164,7 +170,13 @@ void Enemy_BrownShip::Update()
 	// It will update the collider depending on the position
 	if (EnemyHp == 0)
 	{
-		SetToDelete();
+		if (currentAnim != &deadAnim)
+		{
+			deadAnim.Reset();
+			currentAnim = &deadAnim;
+		}
+
+		//SetToDelete(); // Se hace automaticamente luego
 	}
 
 	Enemy::Update();

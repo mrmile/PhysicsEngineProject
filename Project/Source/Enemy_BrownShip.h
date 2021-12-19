@@ -24,6 +24,9 @@ private:
 	Animation leftAnim;
 
 	Animation jumpAnim;
+
+	Animation deadAnim;
+
 };
 
 #endif // __ENEMY_BROWNSHIP_H__

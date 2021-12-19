@@ -492,6 +492,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->audio->PlayFx(App->player->looseMusicFx);
 			App->render->Blit(App->sceneLevel_1->youloose, 100, 50, NULL);
 			destroyed = true;
+			if (currentAnimation != &deadAnim)
+			{
+				deadAnim.Reset();
+				currentAnimation = &deadAnim;
+			}
 		}
 		else
 		{

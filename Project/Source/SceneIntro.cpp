@@ -27,6 +27,7 @@ bool SceneIntro::Start()
 
 	bgTexture = App->textures->Load("Assets/Background.png");
 	startButton = App->textures->Load("Assets/startButton3.png");
+	title = App->textures->Load("Assets/title.png");
 
 	//App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
@@ -55,6 +56,8 @@ Update_Status SceneIntro::PostUpdate()
 	delay++;
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
+
+	App->render->Blit(title, 25, 0, NULL);
 
 	if ((delay / 30) % 2 == 0)
 	{
