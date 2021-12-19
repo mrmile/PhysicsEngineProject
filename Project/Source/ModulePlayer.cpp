@@ -387,7 +387,7 @@ Update_Status ModulePlayer::PostUpdate()
 	if (position.x <= -15) position.x = -15;
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	App->render->Blit(texture, position.x, position.y, &rect);
+	App->render->Blit(texture, position.x + 5, position.y, &rect);
 
 	SDL_Rect quad;
 	quad = { 5, 10, playerHP, 10 };

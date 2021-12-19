@@ -24,35 +24,37 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Sprites/particles.png");
+	texture = App->textures->Load("Assets/RedCharacter.png");
 
 	// Particle Examples
-	explosionRed.anim.PushBack({274, 296, 33, 30});
-	explosionRed.anim.PushBack({313, 296, 33, 30});
-	explosionRed.anim.PushBack({346, 296, 33, 30});
-	explosionRed.anim.PushBack({382, 296, 33, 30});
-	explosionRed.anim.PushBack({419, 296, 33, 30});
-	explosionRed.anim.PushBack({457, 296, 33, 30});
+	explosionRed.anim.PushBack({2, 287, 43, 90});
+	explosionRed.anim.PushBack({45, 287, 54, 90 });
+	explosionRed.anim.PushBack({99, 287, 52, 90 });
+	explosionRed.anim.PushBack({151, 287, 54, 90 });
+	explosionRed.anim.PushBack({205, 287, 54, 90 });
+	explosionRed.anim.PushBack({259, 287, 52, 90 });
+	explosionRed.anim.PushBack({311, 287, 54, 90 });
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
 
-	explosionBlue.anim.PushBack({ 274, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 313, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 346, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 382, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 419, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 457, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 2, 287, 43, 90 });
+	explosionBlue.anim.PushBack({ 45, 287, 54, 90 });
+	explosionBlue.anim.PushBack({ 99, 287, 52, 90 });
+	explosionBlue.anim.PushBack({ 151, 287, 54, 90 });
+	explosionBlue.anim.PushBack({ 205, 287, 54, 90 });
+	explosionBlue.anim.PushBack({ 259, 287, 52, 90 });
+	explosionBlue.anim.PushBack({ 311, 287, 54, 90 });
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
 
-	shootLeft.anim.PushBack({ 232, 103, 16, 12 });
-	shootLeft.anim.PushBack({ 249, 103, 16, 12 });
+	shootLeft.anim.PushBack({ 527, 225, 20, 18 });
+	//shootLeft.anim.PushBack({ 249, 103, 16, 12 });
 	shootLeft.speed.x = -3;
 	shootLeft.anim.loop = true;
 	shootLeft.anim.speed = 0.2f;
 
-	shootRight.anim.PushBack({ 232, 103, 16, 12 });
-	shootRight.anim.PushBack({ 249, 103, 16, 12 });
+	shootRight.anim.PushBack({ 203, 225, 20, 18 });
+	//shootRight.anim.PushBack({ 249, 103, 16, 12 });
 	shootRight.speed.x = 3;
 	shootRight.anim.loop = true;
 	shootRight.anim.speed = 0.2f;
@@ -100,8 +102,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
-			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x + 20, particles[i]->position.y + 40, Collider::Type::NONE);
-			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x + 20, particles[i]->position.y + 40, Collider::Type::NONE);
+			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x , particles[i]->position.y -40, Collider::Type::NONE);
+			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x , particles[i]->position.y -40, Collider::Type::NONE);
 			App->audio->PlayFx(App->player->explosionFx);
 			particles[i]->pendingToDelete = true;
 			particles[i]->collider->pendingToDelete = true;
