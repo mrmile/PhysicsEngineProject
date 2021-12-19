@@ -155,7 +155,9 @@ Update_Status ModulePlayer::Update()
 	/*GetCursorPos(cursorPosition);*/
 
 	collider->SetPos(position.x + 10, position.y + 6);
-	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN) App->sceneLevel_1->TURN = 1;
+	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) App->sceneLevel_1->TURN = 1;
+	if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) App->sceneLevel_1->TURN = 2;
+
 	if (App->sceneLevel_1->TURN == 1 && destroyed == false)
 	{
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
