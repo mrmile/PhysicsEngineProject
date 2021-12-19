@@ -119,6 +119,11 @@ public:
 
 	float forceTimerX;
 
+	/*float aimingPower;
+	float aimingAngle;
+	float aimingPoint;
+	LPPOINT cursorPosition;*/
+
 };
 
 #endif //!__MODULE_PLAYER_H__
