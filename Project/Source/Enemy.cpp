@@ -106,6 +106,12 @@ void Enemy::OnCollision(Collider* collider)
 	if (collider->type == Collider::Type::WALL)
 	{
 		position.y = 227;
+		
+			
+		vy = 0.0;
+		ay = 0.0;
+		fy = 0.0;
+
 		touchingGround = true;
 	}
 	

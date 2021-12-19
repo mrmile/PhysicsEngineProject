@@ -152,7 +152,7 @@ Update_Status ModulePhysics::Update()
 
 
 			App->enemies->enemies[i]->fx += fgx_enemies;
-			if(App->enemies->enemies[i]->touchingGround ==false) App->enemies->enemies[i]->fy += fgy_enemies;
+			if (App->enemies->enemies[i]->touchingGround == false)App->enemies->enemies[i]->fy += fgy_enemies;
 			dt = 1;
 			App->enemies->enemies[i]->ax = App->enemies->enemies[i]->fx / App->enemies->enemies[i]->mass;
 			if (App->enemies->enemies[i]->touchingGround == false)App->enemies->enemies[i]->ay = App->enemies->enemies[i]->fy / App->enemies->enemies[i]->mass;

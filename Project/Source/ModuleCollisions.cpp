@@ -199,6 +199,9 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+			case Collider::Type::EXPLOSION: // magenta
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
 			case Collider::Type::TELEPORT_R: // orange
 			App->render->DrawQuad(colliders[i]->rect, 255, 155, 0, alpha);
 			break;

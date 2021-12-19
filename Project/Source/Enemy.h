@@ -39,6 +39,10 @@ public:
 	int EnemyHp;
 	int Enemy_Counter;
 
+
+	// The speed in which we move the Enemy (pixels per frame)
+	int speed_F = 1;
+
 	//Physics addition 
 
 	float dt;

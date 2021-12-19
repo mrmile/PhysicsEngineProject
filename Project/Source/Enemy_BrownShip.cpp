@@ -11,6 +11,7 @@
 #include "ModuleInput.h"
 #include "SceneLevel1.h"
 #include "ModuleRender.h"
+#include "Particle.h"
 
 Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 {
@@ -99,10 +100,63 @@ void Enemy_BrownShip::Update()
 	if (App->sceneLevel_1->TURN == 2 && App->sceneLevel_1->turnDelay > 120)
 	{
 		//ADD TURN THINGS HERE
+		if (position.x > App->player->position.x && hasShot==false)
+		{
+			if (Enemy_Counter >= 0 && Enemy_Counter < 240)
+			{
+				currentAnim = &idleLeftAnim;
+				speed_F = 1;
+				position.x--;
+				fx = -1.0f;
+			}
+			if (position.DistanceTo(App->player->position) > 100 && position.DistanceTo(App->player->position) < 500)
+			{
+				App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::ENEMY_SHOT);
+				for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+				{
+					if (App->particles->particles[i] != nullptr)
+					{
+						App->particles->particles[i]->vx = (((double)App->player->position.x - position.x) / 240);
+					}
+				}
+				hasShot = true;
+			}
+			if (Enemy_Counter > 240)
+			{
+				App->sceneLevel_1->TURN = 1;
+				Enemy_Counter = 0;
+			}
+			
+		}
+		if (position.x < App->player->position.x && hasShot==false)
+		{
+			if (Enemy_Counter >= 0 && Enemy_Counter < 240)
+			{
+				currentAnim = &idleRightAnim;
+				speed_F = 1;
+				fx = 1.0f;
+			}
+			if (position.DistanceTo(App->player->position) > 100 && position.DistanceTo(App->player->position) < 500)
+			{
+				App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::ENEMY_SHOT);
+				for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+				{
+					if (App->particles->particles[i] != nullptr)
+					{
+						App->particles->particles[i]->vx = (((double)App->player->position.x - position.x) / 240);
+					}
+				}
+				hasShot = true;
+			}
+			if (Enemy_Counter > 240)
+			{
+				App->sceneLevel_1->TURN = 1;
+				Enemy_Counter = 0;
+			}
+			
+		}
 
-
-
-		if (hasShot == true) App->sceneLevel_1->TURN == 1;
+		if (hasShot == true) App->sceneLevel_1->TURN = 1;
 	}
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

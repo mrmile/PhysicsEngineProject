@@ -18,6 +18,7 @@ struct Collider
 		ENEMY,
 		PLAYER_SHOT,
 		ENEMY_SHOT,
+		EXPLOSION,
 		TELEPORT_R,
 		TELEPORT_L,
 		PLANT,

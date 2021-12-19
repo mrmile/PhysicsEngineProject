@@ -90,8 +90,7 @@ bool ModulePlayer::Start()
 	winMusicFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 	looseMusicFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
-	position.x = 200;
-	position.y = 157;
+	
 
 	destroyed = false;
 
