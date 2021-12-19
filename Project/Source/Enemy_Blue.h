@@ -17,15 +17,22 @@ public:
 
 private:
 	
-	Animation idleRightAnim;
-	Animation idleLeftAnim;
+    Animation idleRightAnim;
+    Animation idleLeftAnim;
 
-	Animation rightAnim;
-	Animation leftAnim;
+    Animation rightAnim;
+    Animation leftAnim;
 
-	Animation jumpAnim;
+    Animation jumpAnim;
+    Animation jumpleftAnim;
+    Animation jumprightAnim;
 
-	Animation deadAnim;
+    Animation dieleftAnim;
+    Animation dierightAnim;
+    Animation deadAnim;
+
+    Animation throwleftAnim;
+    Animation throwrightAnim;
 
 };
 
