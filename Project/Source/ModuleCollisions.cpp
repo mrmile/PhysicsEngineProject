@@ -175,7 +175,7 @@ Update_Status ModuleCollisions::Update()
 
 Update_Status ModuleCollisions::PostUpdate()
 {
-	if (debug)
+	if (!debug)
 		DebugDraw();
 
 	return Update_Status::UPDATE_CONTINUE;
