@@ -89,6 +89,8 @@ public:
 
 	bool destroyed = false;
 
+	bool hasShot;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;

@@ -336,11 +336,13 @@ Update_Status ModulePlayer::Update()
 		*/
 
 		currentAnimation->Update();
+		App->sceneLevel_1->turnDelay = 0;
 
 		//return Update_Status::UPDATE_CONTINUE;
 	}
 	else
 	{
+		App->sceneLevel_1->turnDelay++;
 		speed_F = 0;
 		App->player->fx = 0.0f;
 		//currentAnimation = &idleLeftAnim;

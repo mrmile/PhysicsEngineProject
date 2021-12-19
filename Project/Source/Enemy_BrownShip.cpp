@@ -95,9 +95,14 @@ void Enemy_BrownShip::Update()
 	enemy1FPS++;
 	collider->SetPos(position.x+10, position.y+6);
 	currentAnim = &idleRightAnim;
-	if (App->sceneLevel_1->TURN == 2)
+	if (App->sceneLevel_1->turnDelay < 120) hasShot = false;
+	if (App->sceneLevel_1->TURN == 2 && App->sceneLevel_1->turnDelay > 120)
 	{
 		//ADD TURN THINGS HERE
+
+
+
+		if (hasShot == true) App->sceneLevel_1->TURN == 1;
 	}
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
