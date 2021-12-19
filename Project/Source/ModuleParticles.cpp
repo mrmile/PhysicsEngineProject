@@ -51,7 +51,7 @@ bool ModuleParticles::Start()
 	explosionRed.anim.PushBack({ 388, 290, 54, 90 });
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
-	explosionRed.vy = 0;
+	explosionRed.lifetime = 25;
 
 	// finished
 	explosionBlue.anim.PushBack({ 704, 286, 48, 90 });
@@ -77,7 +77,7 @@ bool ModuleParticles::Start()
 	explosionBlue.anim.PushBack({ 388, 290, 54, 90 });
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
-	explosionBlue.vy = 0;
+	explosionBlue.lifetime = 25;
 
 	shootLeft.anim.PushBack({ 527, 225, 20, 18 });
 	shootLeft.speed.x = -3;
@@ -99,6 +99,11 @@ bool ModuleParticles::Start()
 	shootRightPlayer.anim.loop = true;
 	shootRightPlayer.anim.speed = 0.2f;
 
+	
+
+	
+
+	
 	return true;
 }
 
@@ -140,16 +145,19 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 	{
 		// Always destroy particles that collide
 		
-		if (particles[i] != nullptr && particles[i]->collider == c1)
+		if (particles[i] != nullptr && c1->type != Collider::Type::EXPLOSION)
 		{
-			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x , particles[i]->position.y -40, Collider::Type::NONE);
-			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x , particles[i]->position.y -40, Collider::Type::NONE);
-			App->audio->PlayFx(App->player->explosionFx);
+			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x , particles[i]->position.y-80 , Collider::Type::EXPLOSION);
+			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x , particles[i]->position.y-80, Collider::Type::EXPLOSION);
 			particles[i]->pendingToDelete = true;
 			particles[i]->collider->pendingToDelete = true;
 			break;
 		}
-		
+		if (particles[i] != nullptr &&  c1->type == Collider::Type::EXPLOSION)
+		{
+			App->audio->PlayFx(App->player->explosionFx);
+			break;
+		}
 		
 	}
 }
