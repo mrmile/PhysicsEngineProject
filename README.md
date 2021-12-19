@@ -22,6 +22,10 @@ Right Key: Move right stick
 
 Up Key: Jump
 
+SHIFT: Press Shift to Shoot Higher
+
+CTRL: Press Control To Shoot Lower
+
 ### Debugging Keys
 F1: To view colliders
 
