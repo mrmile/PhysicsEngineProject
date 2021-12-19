@@ -24,15 +24,16 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Sprites/particles.png");
+	texture = App->textures->Load("Assets/RedCharacter.png");
 
 	// Particle Examples
-	explosionRed.anim.PushBack({274, 296, 33, 30});
-	explosionRed.anim.PushBack({313, 296, 33, 30});
-	explosionRed.anim.PushBack({346, 296, 33, 30});
-	explosionRed.anim.PushBack({382, 296, 33, 30});
-	explosionRed.anim.PushBack({419, 296, 33, 30});
-	explosionRed.anim.PushBack({457, 296, 33, 30});
+	explosionRed.anim.PushBack({2, 287, 43, 96});
+	explosionRed.anim.PushBack({45, 287, 54, 96 });
+	explosionRed.anim.PushBack({99, 287, 52, 96 });
+	explosionRed.anim.PushBack({151, 287, 54, 96 });
+	explosionRed.anim.PushBack({205, 287, 54, 96 });
+	explosionRed.anim.PushBack({259, 287, 52, 96 });
+	explosionRed.anim.PushBack({311, 287, 54, 96 });
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
 
@@ -45,14 +46,14 @@ bool ModuleParticles::Start()
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
 
-	shootLeft.anim.PushBack({ 232, 103, 16, 12 });
-	shootLeft.anim.PushBack({ 249, 103, 16, 12 });
+	shootLeft.anim.PushBack({ 527, 225, 20, 18 });
+	//shootLeft.anim.PushBack({ 249, 103, 16, 12 });
 	shootLeft.speed.x = -3;
 	shootLeft.anim.loop = true;
 	shootLeft.anim.speed = 0.2f;
 
-	shootRight.anim.PushBack({ 232, 103, 16, 12 });
-	shootRight.anim.PushBack({ 249, 103, 16, 12 });
+	shootRight.anim.PushBack({ 203, 225, 20, 18 });
+	//shootRight.anim.PushBack({ 249, 103, 16, 12 });
 	shootRight.speed.x = 3;
 	shootRight.anim.loop = true;
 	shootRight.anim.speed = 0.2f;
