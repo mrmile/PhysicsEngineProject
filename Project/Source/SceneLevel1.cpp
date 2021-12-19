@@ -8,7 +8,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleInteractiveObj.h"
 #include "ModulePlayer.h"
-#include "Enemy_BrownShip.h"
+#include "Enemy_Blue.h"
 #include "Enemy.h"
 #include "SceneIntro.h"
 #include "ModuleFadeToBlack.h"
@@ -34,7 +34,7 @@ bool SceneLevel1::Start()
 	bgTexture = App->textures->Load("Assets/Background.png");
 	
 
-	level = App->textures->Load("Assets/mapWormspng_v2.png");
+	level = App->textures->Load("Assets/mapWormspng_v3.png");
 
 	App->audio->PlayMusic("Assets/_.ogg", 1.0f);
 
@@ -51,7 +51,7 @@ bool SceneLevel1::Start()
 
 	App->render->camera.x = 10;
 	App->render->camera.y = 150;
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 150, 157);
+	App->enemies->AddEnemy(Enemy_Type::BLUE_ENEMY, 150, 157);
 
 	App->collisions->Enable();
 	App->player->Enable();

@@ -178,7 +178,7 @@ Update_Status ModulePhysics::Update()
 			App->particles->particles[i]->ay = App->particles->particles[i]->fy / App->particles->particles[i]->mass;
 
 			App->particles->particles[i]->position.x += App->particles->particles[i]->vx * dt + 0.5 * App->particles->particles[i]->ax * dt * dt;
-			App->particles->particles[i]->position.y += App->particles->particles[i]->vy * dt + 0.5 * App->particles->particles[i]->ay * dt * dt - App->player->throwCounter;
+			App->particles->particles[i]->position.y += App->particles->particles[i]->vy * dt + 0.5 * App->particles->particles[i]->ay * dt * dt - 2;
 			App->particles->particles[i]->vx += App->particles->particles[i]->ax * dt;
 			App->particles->particles[i]->vy += App->particles->particles[i]->ay * dt;
 		}

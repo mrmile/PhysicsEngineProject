@@ -85,9 +85,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_BrownShip.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Path.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -117,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="ModulePhysics.h">
       <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Blue.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +168,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_BrownShip.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Path.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -200,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="ModulePhysics.cpp">
       <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Blue.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
