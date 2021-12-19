@@ -111,9 +111,9 @@ void Enemy_Blue::Update()
 				currentAnim = &idleLeftAnim;
 				speed_F = 1;
 				position.x--;
-				fx = -1.0f;
+				//fx = -1.0f;
 			}
-			if (position.DistanceTo(App->player->position) > 100 && position.DistanceTo(App->player->position) < 500)
+			if (position.DistanceTo(App->player->position) > 5 && position.DistanceTo(App->player->position) < 500)
 			{
 				App->audio->PlayFx(App->player->shoot);
 				App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::ENEMY_SHOT);
@@ -139,9 +139,9 @@ void Enemy_Blue::Update()
 			{
 				currentAnim = &idleRightAnim;
 				speed_F = 1;
-				fx = 1.0f;
+				//fx = 1.0f;
 			}
-			if (position.DistanceTo(App->player->position) > 100 && position.DistanceTo(App->player->position) < 500)
+			if (position.DistanceTo(App->player->position) > 5 && position.DistanceTo(App->player->position) < 500)
 			{
 				App->audio->PlayFx(App->player->shoot);
 				App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::ENEMY_SHOT);

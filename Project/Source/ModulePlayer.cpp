@@ -224,11 +224,11 @@ Update_Status ModulePlayer::Update()
 				aimingAngle = asin((position.y - cursorPosition->y) / aimingPower) * 180/3.14;
 				aimingPoint = cursorPosition->x + cursorPosition->y;*/
 
-				App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->shootLeftPlayer, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
 			}
 
 
-			if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+			if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRightPlayer, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
 		}
 
 		// If no up/down movement detected, set the current animation back to idle

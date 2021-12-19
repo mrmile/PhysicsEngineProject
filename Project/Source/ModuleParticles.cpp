@@ -80,16 +80,24 @@ bool ModuleParticles::Start()
 	explosionBlue.vy = 0;
 
 	shootLeft.anim.PushBack({ 527, 225, 20, 18 });
-	//shootLeft.anim.PushBack({ 249, 103, 16, 12 });
 	shootLeft.speed.x = -3;
 	shootLeft.anim.loop = true;
 	shootLeft.anim.speed = 0.2f;
 
-	shootRight.anim.PushBack({ 203, 225, 20, 18 });
-	//shootRight.anim.PushBack({ 249, 103, 16, 12 });
+	shootRight.anim.PushBack({ 527, 225, 20, 18 });
 	shootRight.speed.x = 3;
 	shootRight.anim.loop = true;
 	shootRight.anim.speed = 0.2f;
+
+	shootLeftPlayer.anim.PushBack({ 136, 230, 20, 18 });
+	shootLeftPlayer.speed.x = -3;
+	shootLeftPlayer.anim.loop = true;
+	shootLeftPlayer.anim.speed = 0.2f;
+
+	shootRightPlayer.anim.PushBack({ 136, 230, 20, 18 });
+	shootRightPlayer.speed.x = 3;
+	shootRightPlayer.anim.loop = true;
+	shootRightPlayer.anim.speed = 0.2f;
 
 	return true;
 }

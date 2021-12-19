@@ -61,6 +61,9 @@ public:
 	Particle shootLeft;
 	Particle shootRight;
 
+	Particle shootLeftPlayer;
+	Particle shootRightPlayer;
+
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
