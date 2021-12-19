@@ -10,6 +10,9 @@
 #include "ModulePlayer.h"
 #include "Enemy_BrownShip.h"
 #include "Enemy.h"
+#include "SceneIntro.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleParticles.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
@@ -49,6 +52,7 @@ bool SceneLevel1::Start()
 	App->render->camera.x = 10;
 	App->render->camera.y = 150;
 	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 150, 157);
+
 	App->collisions->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
@@ -75,7 +79,8 @@ Update_Status SceneLevel1::PostUpdate()
 
 	if (destroyedDelay > 320)
 	{
-		//Fade out to titleScreen
+		//if(destroyedDelay > 335 && destroyedDelay <= 336) App->audio->PlayFx(App->player->looseMusicFx);
+		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -86,6 +91,15 @@ bool SceneLevel1::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->interactiveObj->Disable();
+	App->collisions->Disable();
+	App->particles->Disable();
+
+	App->textures->Unload(bgTexture);
+	App->textures->Unload(playerTurn);
+	App->textures->Unload(enemyTurn);
+	App->textures->Unload(youWin);
+	App->textures->Unload(youloose);
+	App->textures->Unload(level);
 
 	return true;
 }

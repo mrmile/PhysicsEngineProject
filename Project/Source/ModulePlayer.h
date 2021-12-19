@@ -55,6 +55,8 @@ public:
 
 	Animation jumpAnim;
 
+	Animation deadAnim;
+
 	// The player's collider
 	Collider* collider = nullptr;
 
@@ -62,7 +64,9 @@ public:
 	bool destroyed = false;
 
 	// Sound effects indices
-	uint laserFx = 0;
+	uint shoot = 0;
+	uint hit = 0;
+	uint dead = 0;
 	uint explosionFx = 0;
 	uint winMusicFx = 0;
 	uint looseMusicFx = 0;

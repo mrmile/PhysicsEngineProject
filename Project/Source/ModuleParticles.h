@@ -54,7 +54,8 @@ public:
 
 public:
 	//Template particle for an explosion
-	Particle explosion;
+	Particle explosionRed;
+	Particle explosionBlue;
 
 	//Template particle for a shots
 	Particle shootLeft;

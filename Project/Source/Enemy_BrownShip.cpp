@@ -111,6 +111,7 @@ void Enemy_BrownShip::Update()
 			}
 			if (position.DistanceTo(App->player->position) > 100 && position.DistanceTo(App->player->position) < 500)
 			{
+				App->audio->PlayFx(App->player->shoot);
 				App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::ENEMY_SHOT);
 				for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 				{
@@ -138,6 +139,7 @@ void Enemy_BrownShip::Update()
 			}
 			if (position.DistanceTo(App->player->position) > 100 && position.DistanceTo(App->player->position) < 500)
 			{
+				App->audio->PlayFx(App->player->shoot);
 				App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::ENEMY_SHOT);
 				for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 				{

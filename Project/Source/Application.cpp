@@ -30,8 +30,8 @@ Application::Application()
 	modules[3] =	textures =		new ModuleTextures(true);
 	modules[4] =	audio =			new ModuleAudio(true);
 
-	modules[5] =	sceneIntro =	new SceneIntro(false);
-	modules[6] =	sceneLevel_1 =	new SceneLevel1(true);
+	modules[5] =	sceneIntro =	new SceneIntro(true);
+	modules[6] =	sceneLevel_1 =	new SceneLevel1(false);
 	modules[7] =	player =		new ModulePlayer(false);
 	modules[8] =	particles =		new ModuleParticles(true);
 	modules[9] =	interactiveObj = new ModuleInteractiveObj(false);

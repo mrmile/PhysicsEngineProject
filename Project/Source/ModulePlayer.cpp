@@ -65,6 +65,13 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	jumpAnim.PushBack({ 658, 0, 30, 39 });
 	jumpAnim.loop = true;
 	jumpAnim.speed = 0.1f;
+
+	// die
+	deadAnim.PushBack({ 717, 0, 31, 39 });
+	deadAnim.PushBack({ 687, 0, 30, 39 });
+	deadAnim.PushBack({ 658, 0, 30, 39 });
+	deadAnim.loop = false;
+	deadAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -85,12 +92,15 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/RedCharacter.png");
 	currentAnimation = &idleRightAnim;
 
-	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
-	winMusicFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
-	looseMusicFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	shoot = App->audio->LoadFx("Assets/shoot.wav");
+	hit = App->audio->LoadFx("Assets/hit.wav");
+	dead = App->audio->LoadFx("Assets/dead.wav");
+	explosionFx = App->audio->LoadFx("Assets/explosion.wav");
+	winMusicFx = App->audio->LoadFx("Assets/win.wav");
+	looseMusicFx = App->audio->LoadFx("Assets/loose.wav");
 
-	
+	position.x = 0;
+	position.y = 0;
 
 	destroyed = false;
 
@@ -147,7 +157,7 @@ Update_Status ModulePlayer::Update()
 
 	collider->SetPos(position.x + 10, position.y + 6);
 	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN) App->sceneLevel_1->TURN = 1;
-	if (App->sceneLevel_1->TURN == 1)
+	if (App->sceneLevel_1->TURN == 1 && destroyed == false)
 	{
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
 		{
@@ -204,6 +214,7 @@ Update_Status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 		{
+			App->audio->PlayFx(shoot);
 			if (PlayerLookingPosition == 1)
 			{
 				
@@ -416,6 +427,8 @@ Update_Status ModulePlayer::PostUpdate()
 
 	}
 
+	if(destroyed == true) App->sceneLevel_1->destroyedDelay++;
+
 	// Draw UI (score) --------------------------------------
 	//sprintf_s(scoreText, 10, "%7d", score);
 
@@ -470,16 +483,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		playerHP -= 10;
 		if (playerHP < 0) playerHP = 0;
 		
-		//if (playerHP != 0) app->audio->PlayFx(damaged);
+		if (playerHP != 0) App->audio->PlayFx(hit);
 
 		if (playerHP <= 0)
 		{
 			//invincibleDelay = 121;
 			playerHP = 0;
-			App->audio->PlayFx(looseMusicFx);
+			//App->audio->PlayFx(dead);
+			App->audio->PlayFx(App->player->looseMusicFx);
 			App->render->Blit(App->sceneLevel_1->youloose, 100, 50, NULL);
 			destroyed = true;
-			App->sceneLevel_1->destroyedDelay++;
 		}
 		else
 		{

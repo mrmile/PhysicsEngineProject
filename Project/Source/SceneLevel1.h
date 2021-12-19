@@ -44,20 +44,6 @@ public:
 	SDL_Texture* level = nullptr;
 
 	int bgTextureL1X = 0;
-	int bgTextureL1X2 = 0;
-	int bgTextureL1X3 = 0;
-
-	int bgTextureL2X = 0;
-	int bgTextureL2X2 = 0;
-	int bgTextureL2X3 = 0;
-
-	int bgTextureL3X = 0;
-	int bgTextureL3X2 = 0;
-	int bgTextureL3X3 = 0;
-
-	int bgTextureL4X = 0;
-	int bgTextureL4X2 = 0;
-	int bgTextureL4X3 = 0;
 
 	int TURN = 0;
 	int turnDelay;

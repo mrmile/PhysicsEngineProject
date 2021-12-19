@@ -31,6 +31,8 @@ void Enemy::Update()
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
+
+	if (destroyed == true) App->sceneLevel_1->destroyedDelay++;
 }
 
 void Enemy::Draw()
@@ -87,7 +89,7 @@ void Enemy::OnCollision(Collider* collider)
 
 		if (EnemyHp <= 0)
 		{
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+			//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 			//invincibleDelay = 121;
 			EnemyHp = 0;
 			App->audio->PlayFx(App->player->winMusicFx);

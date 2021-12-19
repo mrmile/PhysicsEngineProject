@@ -5,6 +5,8 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleCollisions.h"
+#include "ModulePlayer.h"
+#include "ModuleAudio.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -25,19 +27,28 @@ bool ModuleParticles::Start()
 	texture = App->textures->Load("Assets/Sprites/particles.png");
 
 	// Particle Examples
-	explosion.anim.PushBack({274, 296, 33, 30});
-	explosion.anim.PushBack({313, 296, 33, 30});
-	explosion.anim.PushBack({346, 296, 33, 30});
-	explosion.anim.PushBack({382, 296, 33, 30});
-	explosion.anim.PushBack({419, 296, 33, 30});
-	explosion.anim.PushBack({457, 296, 33, 30});
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
+	explosionRed.anim.PushBack({274, 296, 33, 30});
+	explosionRed.anim.PushBack({313, 296, 33, 30});
+	explosionRed.anim.PushBack({346, 296, 33, 30});
+	explosionRed.anim.PushBack({382, 296, 33, 30});
+	explosionRed.anim.PushBack({419, 296, 33, 30});
+	explosionRed.anim.PushBack({457, 296, 33, 30});
+	explosionRed.anim.loop = false;
+	explosionRed.anim.speed = 0.3f;
+
+	explosionBlue.anim.PushBack({ 274, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 313, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 346, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 382, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 419, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 457, 296, 33, 30 });
+	explosionBlue.anim.loop = false;
+	explosionBlue.anim.speed = 0.3f;
 
 	shootLeft.anim.PushBack({ 232, 103, 16, 12 });
 	shootLeft.anim.PushBack({ 249, 103, 16, 12 });
 	shootLeft.speed.x = -3;
-	explosion.anim.loop = true;
+	shootLeft.anim.loop = true;
 	shootLeft.anim.speed = 0.2f;
 
 	shootRight.anim.PushBack({ 232, 103, 16, 12 });
@@ -89,6 +100,9 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
+			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x + 20, particles[i]->position.y + 40, Collider::Type::NONE);
+			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x + 20, particles[i]->position.y + 40, Collider::Type::NONE);
+			App->audio->PlayFx(App->player->explosionFx);
 			particles[i]->pendingToDelete = true;
 			particles[i]->collider->pendingToDelete = true;
 			break;
