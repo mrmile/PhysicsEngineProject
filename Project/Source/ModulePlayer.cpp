@@ -78,6 +78,10 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
+	/*aimingPower = 0;
+	aimingAngle = 0;
+	aimingPoint = 0;*/
+
 	texture = App->textures->Load("Assets/RedCharacter.png");
 	currentAnimation = &idleRightAnim;
 
@@ -133,6 +137,8 @@ Update_Status ModulePlayer::Update()
 	//App->player->position.x += 1;
 
 	playerTimer++;
+
+	/*GetCursorPos(cursorPosition);*/
 
 	collider->SetPos(position.x + 10, position.y + 6);
 	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_REPEAT) App->sceneLevel_1->TURN = 0;
@@ -193,9 +199,19 @@ Update_Status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 		{
-			if (PlayerLookingPosition == 1) App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
-			if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+			if (PlayerLookingPosition == 1)
+			{
+				
 
+				/*aimingPower = sqrt(pow(position.x - cursorPosition->x, 2) + pow(position.y - cursorPosition->y, 2));
+				aimingAngle = asin((position.y - cursorPosition->y) / aimingPower) * 180/3.14;
+				aimingPoint = cursorPosition->x + cursorPosition->y;*/
+
+				App->particles->AddParticle(App->particles->shootLeft, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+			}
+
+
+			if (PlayerLookingPosition == 2) App->particles->AddParticle(App->particles->shootRight, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
 		}
 
 		// If no up/down movement detected, set the current animation back to idle
@@ -211,18 +227,18 @@ Update_Status ModulePlayer::Update()
 			switch (PlayerLookingPosition)
 			{
 			case 1:
-				if (currentAnimation != &idleLeftAnim)
-				{
-					idleLeftAnim.Reset();
-					currentAnimation = &idleLeftAnim;
-				}
-
-				break;
-			case 2:
 				if (currentAnimation != &idleRightAnim)
 				{
 					idleRightAnim.Reset();
 					currentAnimation = &idleRightAnim;
+				}
+
+				break;
+			case 2:
+				if (currentAnimation != &idleLeftAnim)
+				{
+					idleLeftAnim.Reset();
+					currentAnimation = &idleLeftAnim;
 				}
 
 				break;
