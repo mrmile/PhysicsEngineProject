@@ -162,7 +162,13 @@ void Enemy_BrownShip::Update()
 			
 		}
 
-		if (hasShot == true) App->sceneLevel_1->TURN = 1;
+		if (hasShot == true)
+		{
+			App->player->throwCounter = 0;
+			App->sceneLevel_1->TURN = 1;
+
+		}
+			
 	}
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

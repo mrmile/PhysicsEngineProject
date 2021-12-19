@@ -269,6 +269,7 @@ Update_Status ModulePlayer::Update()
 		{
 			App->sceneLevel_1->TURN = 2;
 		}
+
 		/*
 		if (vx < 0 && position.y >= 227 && App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
 		{
