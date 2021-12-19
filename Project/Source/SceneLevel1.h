@@ -33,10 +33,13 @@ public:
 public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTextureL1 = nullptr;
-	SDL_Texture* bgTextureL2 = nullptr;
-	SDL_Texture* bgTextureL3 = nullptr;
-	SDL_Texture* bgTextureL4 = nullptr;
+	SDL_Texture* bgTexture = nullptr;
+
+	SDL_Texture* playerTurn = nullptr;
+	SDL_Texture* enemyTurn = nullptr;
+
+	SDL_Texture* youWin = nullptr;
+	SDL_Texture* youloose = nullptr;
 
 	SDL_Texture* level = nullptr;
 
@@ -57,6 +60,7 @@ public:
 	int bgTextureL4X3 = 0;
 
 	int TURN = 0;
+	int turnDelay;
 };
 
 #endif

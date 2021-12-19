@@ -27,7 +27,7 @@ bool SceneLevel1::Start()
 
 	bool ret = true;
 
-	bgTextureL1 = App->textures->Load("Assets/Background.png");
+	bgTexture = App->textures->Load("Assets/Background.png");
 	
 
 	level = App->textures->Load("Assets/mapWormspng_v2.png");
@@ -41,7 +41,8 @@ bool SceneLevel1::Start()
 
 	App->collisions->debug = true;
 	
-	
+	TURN = 1;
+	turnDelay = 0;
 
 	App->render->camera.x = 10;
 	App->render->camera.y = 150;
@@ -66,7 +67,7 @@ Update_Status SceneLevel1::PostUpdate()
 {
 	// Draw everything --------------------------------------
 
-	App->render->Blit(bgTextureL1, -35, 30, NULL, 0.6f);
+	App->render->Blit(bgTexture, -35, 30, NULL, 0.6f);
 	
 	App->render->Blit(level, -1, 0, NULL, 1.0f);
 

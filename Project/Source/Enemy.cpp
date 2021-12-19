@@ -35,15 +35,64 @@ void Enemy::Draw()
 {
 	if (currentAnim != nullptr)
 		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+
+	SDL_Rect Equad;
+	Equad = { 280, 10, EnemyHp, 10 };
+
+	SDL_Rect Equad2;
+	Equad2 = { 280, 10, 100, 10 };
+
+	SDL_Rect Ebgquad;
+	Ebgquad = { 278, 8, 104, 14 };
+	App->render->DrawQuad(Ebgquad, 0, 0, 165, 255, 0.0f, true);
+	App->render->DrawQuad(Equad2, 200, 200, 200, 255, 0.0f, true);
+	//app->render->DrawRectangle(bgquad, 255, 255, 255, 165, true, true);
+	if (EnemyHp >= 100)
+	{
+		EnemyHp = 100;
+		App->render->DrawQuad(Equad, 0, 255, 0, 255, 0.0f, true);
+	}
+	else if (EnemyHp > 50)
+	{
+		App->render->DrawQuad(Equad, 120, 255, 0, 255, 0.0f, true);
+	}
+	else if (EnemyHp > 20 && EnemyHp <= 50)
+	{
+		App->render->DrawQuad(Equad, 255, 255, 0, 255, 0.0f, true);
+	}
+	else
+	{
+		if ((enemy1FPS / 5) % 2 == 0)
+		{
+			App->render->DrawQuad(Equad, 255, 0, 0, 255, 0.0f, true);
+		}
+		else
+		{
+			App->render->DrawQuad(Equad, 255, 150, 0, 255, 0.0f, true);
+		}
+
+	}
 }
 
 void Enemy::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::PLAYER_SHOT)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-		App->audio->PlayFx(destroyedFx);
-		EnemyHp = 0;
+		EnemyHp -= 10;
+		if (EnemyHp < 0) EnemyHp = 0;
+
+		//if (playerHP != 0) app->audio->PlayFx(damaged);
+
+		if (EnemyHp <= 0)
+		{
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+			//invincibleDelay = 121;
+			EnemyHp = 0;
+			//app->audio->PlayFx(dead);
+			destroyed = true;
+
+		}
+		else destroyed = false;
 	}
 	if (collider->type == Collider::Type::WALL)
 	{

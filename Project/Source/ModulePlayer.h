@@ -114,6 +114,9 @@ public:
 
 	bool touchingGround = false;
 
+	int playerHP;
+	int playerFPS;
+
 	float forceTimerX;
 
 };

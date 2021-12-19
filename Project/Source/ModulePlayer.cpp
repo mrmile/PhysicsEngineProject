@@ -122,6 +122,9 @@ bool ModulePlayer::Start()
 
 	forceTimerX = 0.0f;
 
+	playerHP = 100;
+	playerFPS = 0;
+
 	//srand(time(NULL));
 
 	return ret;
@@ -133,10 +136,11 @@ Update_Status ModulePlayer::Update()
 	//App->player->position.x += 1;
 
 	playerTimer++;
+	playerFPS++;
 
 	collider->SetPos(position.x + 10, position.y + 6);
-	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_REPEAT) App->sceneLevel_1->TURN = 0;
-	if (App->sceneLevel_1->TURN == 0)
+	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN) App->sceneLevel_1->TURN = 1;
+	if (App->sceneLevel_1->TURN == 1)
 	{
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
 		{
@@ -229,21 +233,9 @@ Update_Status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
-			&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 		{
-			if (vx < 0)
-			{
-				fx = App->modulePhysics->DragForceLeft(vx);
-			}
-			if (vx > 0)
-			{
-				fx = App->modulePhysics->DragForceRight(vx);
-			}
-		}
-		if (App->input->keys[SDL_SCANCODE_0] == Key_State::KEY_REPEAT)
-		{
-			App->sceneLevel_1->TURN = 1;
+			App->sceneLevel_1->TURN = 2;
 		}
 		/*
 		if (vx < 0 && position.y >= 227 && App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
@@ -329,16 +321,28 @@ Update_Status ModulePlayer::Update()
 
 		currentAnimation->Update();
 
-		return Update_Status::UPDATE_CONTINUE;
+		//return Update_Status::UPDATE_CONTINUE;
 	}
 	else
 	{
 		speed_F = 0;
 		App->player->fx = 0.0f;
-		currentAnimation = &idleLeftAnim;
-		return Update_Status::UPDATE_CONTINUE;
+		//currentAnimation = &idleLeftAnim;
 	}
-	
+
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_IDLE)
+	{
+		if (vx < 0)
+		{
+			fx = App->modulePhysics->DragForceLeft(vx);
+		}
+		if (vx > 0)
+		{
+			fx = App->modulePhysics->DragForceRight(vx);
+		}
+	}
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModulePlayer::PostUpdate()
@@ -355,6 +359,43 @@ Update_Status ModulePlayer::PostUpdate()
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	App->render->Blit(texture, position.x, position.y, &rect);
+
+	SDL_Rect quad;
+	quad = { 5, 10, playerHP, 10 };
+
+	SDL_Rect quad2;
+	quad2 = { 5, 10, 100, 10 };
+
+	SDL_Rect bgquad;
+	bgquad = { 3, 8, 104, 14 };
+	App->render->DrawQuad(bgquad, 165, 0, 0, 255, 0.0f, true);
+	App->render->DrawQuad(quad2, 200, 200, 200, 255, 0.0f, true);
+	//app->render->DrawRectangle(bgquad, 255, 255, 255, 165, true, true);
+	if (playerHP >= 100)
+	{
+		playerHP = 100;
+		App->render->DrawQuad(quad, 0, 255, 0, 255, 0.0f, true);
+	}
+	else if (playerHP > 50)
+	{
+		App->render->DrawQuad(quad, 120, 255, 0, 255, 0.0f, true);
+	}
+	else if (playerHP > 20 && playerHP <= 50)
+	{
+		App->render->DrawQuad(quad, 255, 255, 0, 255, 0.0f, true);
+	}
+	else
+	{
+		if ((playerFPS / 5) % 2 == 0)
+		{
+			App->render->DrawQuad(quad, 255, 0, 0, 255, 0.0f, true);
+		}
+		else
+		{
+			App->render->DrawQuad(quad, 255, 150, 0, 255, 0.0f, true);
+		}
+
+	}
 
 	// Draw UI (score) --------------------------------------
 	//sprintf_s(scoreText, 10, "%7d", score);
@@ -403,5 +444,22 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	else
 	{
 		App->player->touchingGround = false;
+	}
+
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT)
+	{
+		playerHP -= 10;
+		if (playerHP < 0) playerHP = 0;
+		
+		//if (playerHP != 0) app->audio->PlayFx(damaged);
+
+		if (playerHP <= 0)
+		{
+			//invincibleDelay = 121;
+			playerHP = 0;
+			//app->audio->PlayFx(dead);
+			destroyed = true;
+
+		}
 	}
 }

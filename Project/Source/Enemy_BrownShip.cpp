@@ -10,10 +10,11 @@
 #include "p2Point.h"
 #include "ModuleInput.h"
 #include "SceneLevel1.h"
+#include "ModuleRender.h"
 
 Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 {
-	Enemy::EnemyHp = 2;
+	Enemy::EnemyHp = 100;
 	position.x = 150;
 	position.y = 157;
 
@@ -83,6 +84,7 @@ Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 	cl = 1.2f;
 
 	forceTimerX = 0.0f;
+	enemy1FPS = 0;
 
 	collider = App->collisions->AddCollider({position.x+10, position.y+6, 16, 30}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
@@ -90,9 +92,10 @@ Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 void Enemy_BrownShip::Update()
 {
 	Enemy_Counter++;
+	enemy1FPS++;
 	collider->SetPos(position.x+10, position.y+6);
 	currentAnim = &idleRightAnim;
-	if (App->sceneLevel_1->TURN == 1)
+	if (App->sceneLevel_1->TURN == 2)
 	{
 		//ADD TURN THINGS HERE
 	}
@@ -102,5 +105,6 @@ void Enemy_BrownShip::Update()
 	{
 		SetToDelete();
 	}
+
 	Enemy::Update();
 }
