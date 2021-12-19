@@ -175,7 +175,7 @@ bool ModulePlayer::Start()
 
 	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font3.png", lookupTable, 2);
+	scoreFont = App->fonts->Load("Assets/rtype_font3.png", lookupTable, 2);
 
 	PlayerLookingPosition = 2;
 
@@ -360,9 +360,21 @@ Update_Status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN)
 		{
-			throwCounter++;
+			
+			if (throwCounter < 10)
+			{
+				throwCounter++;
+			}
+		}
+
+		if (App->input->keys[SDL_SCANCODE_LCTRL] == Key_State::KEY_DOWN)
+		{
+			if (throwCounter > 0)
+			{
+				throwCounter--;
+			}	
 		}
 
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
@@ -535,12 +547,12 @@ Update_Status ModulePlayer::PostUpdate()
 	if(destroyed == true) App->sceneLevel_1->destroyedDelay++;
 
 	// Draw UI (score) --------------------------------------
-	//sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(scoreText, 10, "%7d", throwCounter *30);
 
 	// TODO 3: Blit the text of the score in at the bottom of the screen
-	//App->fonts->BlitText(58, 248, scoreFont, scoreText);
+	App->fonts->BlitText(-30, 40, scoreFont, scoreText);
 
-	//App->fonts->BlitText(150, 248, scoreFont, "this is just a font test message");
+	//App->fonts->BlitText(0, 0, scoreFont, "this is just a font test message");
 
 	return Update_Status::UPDATE_CONTINUE;
 }
