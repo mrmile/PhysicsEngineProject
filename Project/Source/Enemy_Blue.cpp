@@ -166,16 +166,17 @@ void Enemy_Blue::Update()
 	Enemy_Counter++;
 	enemy1FPS++;
 	collider->SetPos(position.x+10, position.y+6);
-	currentAnim = &idleRightAnim;
+	//currentAnim = &idleRightAnim;
 	if (App->sceneLevel_1->turnDelay < 120) hasShot = false;
 	if (App->sceneLevel_1->TURN == 2 && App->sceneLevel_1->turnDelay > 120 && destroyed == false)
 	{
 		//ADD TURN THINGS HERE
 		if (position.x > App->player->position.x && hasShot==false)
 		{
+			
 			if (Enemy_Counter >= 0 && Enemy_Counter < 240)
 			{
-				currentAnim = &idleLeftAnim;
+				
 				speed_F = 1;
 				position.x--;
 				//fx = -1.0f;
@@ -204,7 +205,7 @@ void Enemy_Blue::Update()
 		{
 			if (Enemy_Counter >= 0 && Enemy_Counter < 240)
 			{
-				currentAnim = &idleRightAnim;
+				
 				speed_F = 1;
 				//fx = 1.0f;
 			}
@@ -236,6 +237,24 @@ void Enemy_Blue::Update()
 
 		}
 			
+	}
+
+	if (position.x >= App->player->position.x)
+	{
+		if (currentAnim != &idleLeftAnim)
+		{
+			//idleLeftAnim.Reset();
+			currentAnim = &idleLeftAnim;
+		}
+	}
+
+	if (position.x > App->player->position.x)
+	{
+		if (currentAnim != &idleRightAnim)
+		{
+			//idleRightAnim.Reset();
+			currentAnim = &idleRightAnim;
+		}
 	}
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
