@@ -125,6 +125,8 @@ public:
 
 	float forceTimerX;
 
+	int throwCounter;
+
 	/*float aimingPower;
 	float aimingAngle;
 	float aimingPoint;
