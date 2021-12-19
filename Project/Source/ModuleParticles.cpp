@@ -37,12 +37,13 @@ bool ModuleParticles::Start()
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
 
-	explosionBlue.anim.PushBack({ 274, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 313, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 346, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 382, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 419, 296, 33, 30 });
-	explosionBlue.anim.PushBack({ 457, 296, 33, 30 });
+	explosionBlue.anim.PushBack({ 2, 287, 43, 96 });
+	explosionBlue.anim.PushBack({ 45, 287, 54, 96 });
+	explosionBlue.anim.PushBack({ 99, 287, 52, 96 });
+	explosionBlue.anim.PushBack({ 151, 287, 54, 96 });
+	explosionBlue.anim.PushBack({ 205, 287, 54, 96 });
+	explosionBlue.anim.PushBack({ 259, 287, 52, 96 });
+	explosionBlue.anim.PushBack({ 311, 287, 54, 96 });
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
 
@@ -101,8 +102,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
-			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x + 20, particles[i]->position.y + 40, Collider::Type::NONE);
-			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x + 20, particles[i]->position.y + 40, Collider::Type::NONE);
+			if(c1->type == Collider::Type::PLAYER_SHOT) App->particles->AddParticle(App->particles->explosionRed, particles[i]->position.x , particles[i]->position.y -40, Collider::Type::NONE);
+			if (c1->type == Collider::Type::ENEMY_SHOT) App->particles->AddParticle(App->particles->explosionBlue, particles[i]->position.x , particles[i]->position.y -40, Collider::Type::NONE);
 			App->audio->PlayFx(App->player->explosionFx);
 			particles[i]->pendingToDelete = true;
 			particles[i]->collider->pendingToDelete = true;
