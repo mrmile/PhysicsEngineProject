@@ -18,59 +18,123 @@
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle left
-	idleLeftAnim.PushBack({ 2, 0, 31, 39 });
-	idleLeftAnim.PushBack({ 32, 0, 30, 39 });
+	idleLeftAnim.PushBack({ 2, 0, 30, 39 });
+	idleLeftAnim.PushBack({ 32, 0, 31, 39 });
 	idleLeftAnim.PushBack({ 61, 0, 30, 39 });
 	idleLeftAnim.loop = true;
 	idleLeftAnim.speed = 0.1f;
 
 	// idle Right
-	idleRightAnim.PushBack({ 717, 0, 31, 39 });
-	idleRightAnim.PushBack({ 687, 0, 30, 39 });
+	idleRightAnim.PushBack({ 717, 0, 30, 39 });
+	idleRightAnim.PushBack({ 687, 0, 31, 39 });
 	idleRightAnim.PushBack({ 658, 0, 30, 39 });
 	idleRightAnim.loop = true;
 	idleRightAnim.speed = 0.1f;
 
 	// Move left
-	leftAnim.PushBack({ 375, 0, 29, 39 });
-	leftAnim.PushBack({ 407, 0, 29, 39 });
-	leftAnim.PushBack({ 440, 0, 29, 39 });
-	leftAnim.PushBack({ 472, 0, 29, 39 });
-	leftAnim.PushBack({ 502, 0, 29, 39 });
-	leftAnim.PushBack({ 530, 0, 28, 39 });
-	leftAnim.PushBack({ 561, 0, 29, 39 });
-	leftAnim.PushBack({ 593, 0, 29, 39 });
-	leftAnim.PushBack({ 621, 0, 29, 39 });
+	leftAnim.PushBack({ 620, 0, 29, 39 });
+	leftAnim.PushBack({ 593, 0, 27, 39 });
+	leftAnim.PushBack({ 562, 0, 31, 39 });
+	leftAnim.PushBack({ 531, 0, 31, 39 });
+	leftAnim.PushBack({ 504, 0, 26, 39 });
+	leftAnim.PushBack({ 473, 0, 28, 39 });
+	leftAnim.PushBack({ 441, 0, 30, 39 });
+	leftAnim.PushBack({ 407, 0, 33, 37 });
+	leftAnim.PushBack({ 377, 0, 29, 39 });
 	leftAnim.loop = true;
 	leftAnim.speed = 0.3f;
 
 	// Move right
-	rightAnim.PushBack({ 97, 0, 32, 39 });
-	rightAnim.PushBack({ 129, 0, 27, 39 });
-	rightAnim.PushBack({ 156, 0, 28, 39 });
-	rightAnim.PushBack({ 187, 0, 31, 39 });
-	rightAnim.PushBack({ 218, 0, 31, 39 });
-	rightAnim.PushBack({ 247, 0, 29, 39 });
-	rightAnim.PushBack({ 277, 0, 30, 39 });
-	rightAnim.PushBack({ 308, 0, 31, 39 });
-	rightAnim.PushBack({ 342, 0, 34, 39 });
-	
+	rightAnim.PushBack({ 100, 0, 29, 39 });
+	rightAnim.PushBack({ 130, 0, 27, 39 });
+	rightAnim.PushBack({ 157, 0, 31, 39 });
+	rightAnim.PushBack({ 188, 0, 31, 39 });
+	rightAnim.PushBack({ 220, 0, 26, 39 });
+	rightAnim.PushBack({ 249, 0, 28, 39 });
+	rightAnim.PushBack({ 279, 0, 30, 39 });
+	rightAnim.PushBack({ 310, 0, 33, 39 });
+	rightAnim.PushBack({ 343, 0, 29, 39 });
 	rightAnim.loop = true;
 	rightAnim.speed = 0.3f;
 
-	// jump
-	jumpAnim.PushBack({ 717, 0, 31, 39 });
+	// Jump left
+	jumpleftAnim.PushBack({ 720, 177, 28, 46 });
+	jumpleftAnim.PushBack({ 692, 178, 28, 44 });
+	jumpleftAnim.PushBack({ 663, 179, 28, 42 });
+	jumpleftAnim.PushBack({ 634, 180, 28, 39 });
+	jumpleftAnim.PushBack({ 606, 181, 28, 35 });
+	jumpleftAnim.PushBack({ 576, 181, 28, 34 });
+	jumpleftAnim.PushBack({ 547, 181, 28, 35 });
+	jumpleftAnim.PushBack({ 518, 181, 28, 39 });
+	jumpleftAnim.PushBack({ 488, 180, 28, 42 });
+	jumpleftAnim.loop = true;
+	jumpleftAnim.speed = 0.1f;
+
+	// Jump Right
+	jumprightAnim.PushBack({ 2, 177, 28, 46 });
+	jumprightAnim.PushBack({ 30, 178, 28, 44 });
+	jumprightAnim.PushBack({ 59, 179, 28, 42 });
+	jumprightAnim.PushBack({ 88, 180, 28, 39 });
+	jumprightAnim.PushBack({ 116, 181, 28, 35 });
+	jumprightAnim.PushBack({ 146, 181, 28, 34 });
+	jumprightAnim.PushBack({ 175, 181, 28, 35 });
+	jumprightAnim.PushBack({ 204, 181, 28, 39 });
+	jumprightAnim.PushBack({ 234, 180, 28, 42 });
+	jumprightAnim.loop = true;
+	jumprightAnim.speed = 0.1f;
+
+	// Jump
+	jumpAnim.PushBack({ 717, 0, 28, 39 });
 	jumpAnim.PushBack({ 687, 0, 30, 39 });
 	jumpAnim.PushBack({ 658, 0, 30, 39 });
 	jumpAnim.loop = true;
 	jumpAnim.speed = 0.1f;
 
-	// die
+
+	// Die left
+	dieleftAnim.PushBack({ 472, 467, 28, 40 });
+	dieleftAnim.PushBack({ 443, 471, 28, 36 });
+	dieleftAnim.PushBack({ 408, 484, 33, 23 });
+	dieleftAnim.PushBack({ 378, 484, 30, 23 });
+	dieleftAnim.PushBack({ 471, 511, 32, 23 });
+	dieleftAnim.PushBack({ 439, 510, 32, 23 });
+	dieleftAnim.loop = true;
+	dieleftAnim.speed = 0.1f;
+
+	// Die Right
+	dierightAnim.PushBack({ 250, 467, 28, 40 });
+	dierightAnim.PushBack({ 279, 471, 28, 36 });
+	dierightAnim.PushBack({ 309, 484, 33, 23 });
+	dierightAnim.PushBack({ 340, 484, 30, 23 });
+	dierightAnim.PushBack({ 247, 511, 32, 23 });
+	dierightAnim.PushBack({ 279, 510, 32, 23 });
+	jumprightAnim.loop = true;
+	jumprightAnim.speed = 0.1f;
+
+	// Die
 	deadAnim.PushBack({ 717, 0, 31, 39 });
 	deadAnim.PushBack({ 687, 0, 30, 39 });
 	deadAnim.PushBack({ 658, 0, 30, 39 });
 	deadAnim.loop = false;
 	deadAnim.speed = 0.1f;
+
+	// Throw Left
+	throwleftAnim.PushBack({ 709, 245, 36, 37 });
+	jumpleftAnim.PushBack({ 676, 244, 30, 38 });
+	jumpleftAnim.PushBack({ 624, 246, 30, 36 });
+	jumpleftAnim.PushBack({ 568, 246, 30, 36 });
+	jumpleftAnim.PushBack({ 533, 245, 27, 37 });
+	jumpleftAnim.loop = true;
+	jumpleftAnim.speed = 0.1f;
+
+	// Throw Right
+	throwrightAnim.PushBack({ 5, 245, 36, 37 });
+	throwrightAnim.PushBack({ 44, 244, 30, 38 });
+	throwrightAnim.PushBack({ 96, 246, 30, 36 });
+	throwrightAnim.PushBack({ 152, 246, 30, 36 });
+	throwrightAnim.PushBack({ 190, 245, 27, 37 });
+	throwrightAnim.loop = true;
+	throwrightAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -162,10 +226,21 @@ Update_Status ModulePlayer::Update()
 	{
 		if (App->input->keys[SDL_SCANCODE_LEFT] == Key_State::KEY_REPEAT)
 		{
-			if (currentAnimation != &leftAnim)
+			if (position.y >= 227)
 			{
-				leftAnim.Reset();
-				currentAnimation = &leftAnim;
+				if (currentAnimation != &leftAnim)
+				{
+					leftAnim.Reset();
+					currentAnimation = &leftAnim;
+				}
+			}
+			if (position.y < 227)
+			{
+				if (currentAnimation != &jumpleftAnim)
+				{
+					jumpleftAnim.Reset();
+					currentAnimation = &jumpleftAnim;
+				}
 			}
 			speed_F = 1;
 			//position.x--;
@@ -177,10 +252,22 @@ Update_Status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_RIGHT] == Key_State::KEY_REPEAT)
 		{
-			if (currentAnimation != &rightAnim)
+			
+			if (position.y >= 227)
 			{
-				rightAnim.Reset();
-				currentAnimation = &rightAnim;
+				if (currentAnimation != &rightAnim)
+				{
+					rightAnim.Reset();
+					currentAnimation = &rightAnim;
+				}
+			}
+			if (position.y < 227)
+			{
+				if (currentAnimation != &jumprightAnim)
+				{
+					jumprightAnim.Reset();
+					currentAnimation = &jumprightAnim;
+				}
 			}
 			speed_F = 1;
 			//position.x++;
@@ -201,10 +288,21 @@ Update_Status ModulePlayer::Update()
 				//if (fx == 0) vx = 0;
 			}
 
-			if (currentAnimation != &jumpAnim)
+			if (PlayerLookingPosition == 1)
 			{
-				jumpAnim.Reset();
-				currentAnimation = &jumpAnim;
+				if (currentAnimation != &jumpleftAnim)
+				{
+					jumpleftAnim.Reset();
+					currentAnimation = &jumpleftAnim;
+				}
+			}
+			if (PlayerLookingPosition == 2)
+			{
+				if (currentAnimation != &jumprightAnim)
+				{
+					jumprightAnim.Reset();
+					currentAnimation = &jumprightAnim;
+				}
 			}
 			speed_F = 1;
 			//position.x++;
