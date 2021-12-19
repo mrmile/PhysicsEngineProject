@@ -171,7 +171,6 @@ Update_Status ModulePhysics::Update()
 			double fgx_particles = App->particles->particles[i]->mass * 0.0f;
 			double fgy_particles = App->particles->particles[i]->mass * 0.005f;
 
-
 			App->particles->particles[i]->fx += fgx_particles;
 			App->particles->particles[i]->fy += fgy_particles;
 			dt = 1;
@@ -184,6 +183,8 @@ Update_Status ModulePhysics::Update()
 			App->particles->particles[i]->vy += App->particles->particles[i]->ay * dt;
 		}
 	}
+
+	
 
 	return Update_Status::UPDATE_CONTINUE;
 }

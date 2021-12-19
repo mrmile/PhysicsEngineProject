@@ -24,9 +24,11 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/RedCharacter.png");
+	texture = App->textures->Load("Assets/RedCharacter_MIXED.png"); // mirar el spritesheet en el que pone MIXED
 
 	// Particle Examples
+
+	// unfinished
 	explosionRed.anim.PushBack({2, 287, 43, 90});
 	explosionRed.anim.PushBack({45, 287, 54, 90 });
 	explosionRed.anim.PushBack({99, 287, 52, 90 });
@@ -34,18 +36,48 @@ bool ModuleParticles::Start()
 	explosionRed.anim.PushBack({205, 287, 54, 90 });
 	explosionRed.anim.PushBack({259, 287, 52, 90 });
 	explosionRed.anim.PushBack({311, 287, 54, 90 });
+	explosionRed.anim.PushBack({ 701, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 380, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 290, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 290, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 290, 54, 90 });
+	explosionRed.anim.PushBack({ 388, 290, 54, 90 });
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
+	explosionRed.vy = 0;
 
-	explosionBlue.anim.PushBack({ 2, 287, 43, 90 });
-	explosionBlue.anim.PushBack({ 45, 287, 54, 90 });
-	explosionBlue.anim.PushBack({ 99, 287, 52, 90 });
-	explosionBlue.anim.PushBack({ 151, 287, 54, 90 });
-	explosionBlue.anim.PushBack({ 205, 287, 54, 90 });
-	explosionBlue.anim.PushBack({ 259, 287, 52, 90 });
-	explosionBlue.anim.PushBack({ 311, 287, 54, 90 });
+	// finished
+	explosionBlue.anim.PushBack({ 704, 286, 48, 90 });
+	explosionBlue.anim.PushBack({ 656, 286, 54, 90 });
+	explosionBlue.anim.PushBack({ 601, 286, 52, 90 });
+	explosionBlue.anim.PushBack({ 547, 286, 54, 90 });
+	explosionBlue.anim.PushBack({ 494, 286, 54, 90 });
+	explosionBlue.anim.PushBack({ 440, 286, 52, 90 });
+	explosionBlue.anim.PushBack({ 388, 290, 54, 90 });
+	explosionBlue.anim.PushBack({ 701, 380, 54, 90 });
+	// unfinished
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 380, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 290, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 290, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 290, 54, 90 });
+	explosionBlue.anim.PushBack({ 388, 290, 54, 90 });
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
+	explosionBlue.vy = 0;
 
 	shootLeft.anim.PushBack({ 527, 225, 20, 18 });
 	//shootLeft.anim.PushBack({ 249, 103, 16, 12 });
@@ -128,6 +160,8 @@ Update_Status ModuleParticles::Update()
 			particles[i]->SetToDelete();
 		}
 	}
+
+	
 
 	return Update_Status::UPDATE_CONTINUE;
 }
