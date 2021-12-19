@@ -22,7 +22,7 @@ Right Key: Move right stick
 
 Up Key: Jump
 
-SHIFT: Press Shift to Shoot Higher
+LSHIFT: Press Shift to Shoot Higher
 
 CTRL: Press Control To Shoot Lower
 
@@ -35,4 +35,4 @@ F3: Force enemy turn
 
 ## Game Goal
 The goal of the game is to hit the enemy with a grenade and avoid the enemy hitting you. You win if you reduce the enemy's HP to cero and die if the enemy reduces yours to cero.
-Each turn, enemy or player, finishes once shooting the grenade.
+Each turn, enemy or player, finishes once shooting the grenade. You can control the stenght of the Shot with LSHIFT and CTRL.
