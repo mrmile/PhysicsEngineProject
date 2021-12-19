@@ -36,6 +36,8 @@ public:
 	SDL_Texture* startButton = nullptr;
 	SDL_Texture* title = nullptr;
 
+	uint startFx = 0;
+
 	int delay;
 
 };

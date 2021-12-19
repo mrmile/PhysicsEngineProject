@@ -29,6 +29,9 @@ bool SceneIntro::Start()
 	startButton = App->textures->Load("Assets/startButton3.png");
 	title = App->textures->Load("Assets/title.png");
 
+	startFx = App->audio->LoadFx("Assets/bonus.wav");
+
+
 	//App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
@@ -43,7 +46,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
-		//App->player->Enable();
+		App->audio->PlayFx(startFx);
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
 	}
 
