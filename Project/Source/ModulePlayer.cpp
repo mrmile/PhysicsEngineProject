@@ -487,7 +487,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::ENEMY_SHOT)
 	{
-		playerHP -= 10;
+		playerHP -= 15;
 		if (playerHP < 0) playerHP = 0;
 		
 		if (playerHP != 0) App->audio->PlayFx(hit);

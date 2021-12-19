@@ -83,7 +83,7 @@ void Enemy::OnCollision(Collider* collider)
 {
 	if (collider->type == Collider::Type::PLAYER_SHOT)
 	{
-		EnemyHp -= 10;
+		EnemyHp -= 15;
 		if (EnemyHp < 0) EnemyHp = 0;
 
 		//if (enemyHP != 0) app->audio->PlayFx(damaged);
