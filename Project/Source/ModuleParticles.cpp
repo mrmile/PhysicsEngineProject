@@ -27,23 +27,23 @@ bool ModuleParticles::Start()
 	texture = App->textures->Load("Assets/RedCharacter.png");
 
 	// Particle Examples
-	explosionRed.anim.PushBack({2, 287, 43, 96});
-	explosionRed.anim.PushBack({45, 287, 54, 96 });
-	explosionRed.anim.PushBack({99, 287, 52, 96 });
-	explosionRed.anim.PushBack({151, 287, 54, 96 });
-	explosionRed.anim.PushBack({205, 287, 54, 96 });
-	explosionRed.anim.PushBack({259, 287, 52, 96 });
-	explosionRed.anim.PushBack({311, 287, 54, 96 });
+	explosionRed.anim.PushBack({2, 287, 43, 90});
+	explosionRed.anim.PushBack({45, 287, 54, 90 });
+	explosionRed.anim.PushBack({99, 287, 52, 90 });
+	explosionRed.anim.PushBack({151, 287, 54, 90 });
+	explosionRed.anim.PushBack({205, 287, 54, 90 });
+	explosionRed.anim.PushBack({259, 287, 52, 90 });
+	explosionRed.anim.PushBack({311, 287, 54, 90 });
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
 
-	explosionBlue.anim.PushBack({ 2, 287, 43, 96 });
-	explosionBlue.anim.PushBack({ 45, 287, 54, 96 });
-	explosionBlue.anim.PushBack({ 99, 287, 52, 96 });
-	explosionBlue.anim.PushBack({ 151, 287, 54, 96 });
-	explosionBlue.anim.PushBack({ 205, 287, 54, 96 });
-	explosionBlue.anim.PushBack({ 259, 287, 52, 96 });
-	explosionBlue.anim.PushBack({ 311, 287, 54, 96 });
+	explosionBlue.anim.PushBack({ 2, 287, 43, 90 });
+	explosionBlue.anim.PushBack({ 45, 287, 54, 90 });
+	explosionBlue.anim.PushBack({ 99, 287, 52, 90 });
+	explosionBlue.anim.PushBack({ 151, 287, 54, 90 });
+	explosionBlue.anim.PushBack({ 205, 287, 54, 90 });
+	explosionBlue.anim.PushBack({ 259, 287, 52, 90 });
+	explosionBlue.anim.PushBack({ 311, 287, 54, 90 });
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
 
