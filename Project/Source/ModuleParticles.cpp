@@ -51,8 +51,7 @@ bool ModuleParticles::Start()
 	explosionRed.anim.PushBack({ 198, 484, 46, 47 });
 	explosionRed.anim.loop = false;
 	explosionRed.anim.speed = 0.3f;
-	explosionRed.lifetime = 25;
-
+	
 	// finished
 	explosionBlue.anim.PushBack({ 706, 284, 39, 91 });
 	explosionBlue.anim.PushBack({ 655, 287, 45, 90 });
@@ -76,7 +75,7 @@ bool ModuleParticles::Start()
 	explosionBlue.anim.PushBack({ 506, 484, 46, 47 });
 	explosionBlue.anim.loop = false;
 	explosionBlue.anim.speed = 0.3f;
-	explosionBlue.lifetime = 25;
+	
 
 	shootLeft.anim.PushBack({ 527, 225, 20, 18 });
 	shootLeft.speed.x = -3;
